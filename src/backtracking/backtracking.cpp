@@ -16,7 +16,7 @@ struct Node {
 	}
 };
 
-void backtracking(int current, int n, int covered, int usedNodes, Node graph[], bool localSolution[], int& nodesUsed);
+void backtracking(int current, int& n, int covered, int usedNodes, Node graph[], bool localSolution[], int& nodesUsedInSolution);
 
 int main() {
 
@@ -26,12 +26,12 @@ int main() {
 	Node graph[n]; // declare graph container
 	
 	bool localSolution[n];
-	int nodesUsed = n;
+	int nodesUsedInSolution = n + 1; // worst case scenario is n, that way I avoid setting all the array as true.
 
 	int u, v;
 	for (int i = 1; i <= m; ++i) { // (u,v) edges
 		cin >> u >> v;
-		u--;
+		u--; // nodes are counted from 0 in array.
 		v--;
 		graph[u].adj.push_front(v);
 		graph[v].adj.push_front(u);
@@ -39,9 +39,16 @@ int main() {
 		graph[v].degree++;
 	}
 
-	backtracking(0, n, 0, 0, graph, localSolution, nodesUsed);
+	for (int i = 1; i <= m; ++i) { // add d(v)=0 nodes to cover.
+		if (graph[i].degree == 0) {
+			graph[i].added = true;
+		}
+	}
 
-	cout << nodesUsed;
+	backtracking(0, n, 0, 0, graph, localSolution, nodesUsedInSolution);
+
+	// display solution
+	cout << nodesUsedInSolution;
 	for (int i = 0; i < n; ++i) {
 		if (localSolution[i] == true) cout << " " << i + 1;
 	}
@@ -50,11 +57,11 @@ int main() {
 	return 0;
 }
 
-void backtracking(int current, int n, int covered, int usedNodes, Node graph[], bool localSolution[], int& nodesUsed) {
-	// cout << "current: " << current << " n: " << n << " covered: " << covered << " usedNodes: " << usedNodes << " nodesUsed: " << nodesUsed <<  endl;
-	if (graph[current].reachable == true) return backtracking(current + 1, n, covered, usedNodes, graph, localSolution, nodesUsed);
-	if (current == n) return;
-	if (nodesUsed == usedNodes + 1) return;
+void backtracking(int current, int& n, int covered, int usedNodes, Node graph[], bool localSolution[], int& nodesUsedInSolution) {
+	// cout << "current: " << current << " n: " << n << " covered: " << covered << " usedNodes: " << usedNodes << " nodesUsedInSolution: " << nodesUsedInSolution <<  endl;
+	if (graph[current].reachable == true) return backtracking(current + 1, n, covered, usedNodes, graph, localSolution, nodesUsedInSolution);
+	if (current == n) return; // no nodes left to add.
+	if (nodesUsedInSolution == usedNodes + 1) return;
 
 	int pushed = 0;
 	forward_list<int> added;
@@ -64,7 +71,7 @@ void backtracking(int current, int n, int covered, int usedNodes, Node graph[], 
 		if (graph[adjNode].reachable == false) {
 			graph[adjNode].reachable = true;
 			added.push_front(adjNode);
-			pushed++;
+			++pushed;
 		}
 	}
 
@@ -72,17 +79,17 @@ void backtracking(int current, int n, int covered, int usedNodes, Node graph[], 
 		for (int i = 0; i < n; ++i) {
 			localSolution[i] = graph[i].added;
 		}
-		nodesUsed = usedNodes++;
+		nodesUsedInSolution = ++usedNodes;
 	} else {
-		backtracking(current + 1, n, (covered + pushed + 1), (usedNodes + 1), graph, localSolution, nodesUsed); // adding current element to coverage
+		backtracking(current + 1, n, (covered + pushed + 1), (usedNodes + 1), graph, localSolution, nodesUsedInSolution); // adding current element to coverage
 	}
 
+	// restore graph state
 	graph[current].added = false;
-	// restore reachable nodes
 	for (auto it = added.begin(); it != added.end(); ++it) {
 		graph[*it].reachable = false;
 	}
 
-	backtracking(current + 1, n, covered, usedNodes, graph, localSolution, nodesUsed);
+	backtracking(current + 1, n, covered, usedNodes, graph, localSolution, nodesUsedInSolution);
 
 }
