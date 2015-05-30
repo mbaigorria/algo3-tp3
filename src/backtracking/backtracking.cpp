@@ -23,11 +23,11 @@ int main() {
 	int n, m; // n: vertices, m: edges
 	cin >> n >> m;
 
-	Node graph[n]; // declare graph container
+	Node graph[n]; // graph container
 	
 	bool localSolution[n];
-	int nodesUsedInSolution = n + 1; // worst case scenario is n, that way I avoid setting all the array as true.
-
+	int nodesUsedInSolution = n; // worst case scenario is n, that way I avoid setting all the array as true.
+	
 	int u, v;
 	for (int i = 1; i <= m; ++i) { // (u,v) edges
 		cin >> u >> v;
@@ -42,6 +42,7 @@ int main() {
 	for (int i = 1; i <= m; ++i) { // add d(v)=0 nodes to cover.
 		if (graph[i].degree == 0) {
 			graph[i].added = true;
+			graph[i].reachable = true;
 		}
 	}
 

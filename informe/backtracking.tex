@@ -1,9 +1,38 @@
 \section{Algoritmo Exacto}
 
-\subsection{Notacion}
+\subsection{Algoritmo}
+Utilizando backtracking, recorremos todas los conjuntos dominantes independientes y luego seleccionamos el de menor cardinalidad.
+Representamos al grafo con un arreglo $graph[n]$ de nodos. Cada nodo tiene los siguientes atributos:
 
-Sea $\gamma(G)$ el numero de vertices en el conjunto CIDM.
+\begin{enumerate}
+	\item adj: Lista de nodos adyacentes al nodo actual.
+	\item degree: Grado del nodo actual.
+	\item added: Bool que indica si el nodo ha sido agregado al conjunto que representa el cubrimiento.
+	\item reachable: Bool que indica si el nodo actual puede ser alcanzado desde un nodo perteneciente al cubrimiento.
+\end{enumerate}
 
-\subsection{Cotas Superiores e Inferiores}
+Comenzamos definiendo la función $backtracking$, que lo que hace es tomar un nodo del grafo, y luego considera los casos en los que el nodo pertenece o no a un posible cubrimiento. En caso de agregar el nodo al cubrimiento, todos los nodos adyacentes al mismo son ignorados en futuras llamadas recursivas. Si consideráramos los nodos adyacentes, romperíamos la independencia de los  cubrimientos y ademas no solo incrementaría la complejidad del código sino que también el tiempo de ejecución del mismo.
 
-El problema de
+\subsection{Podas y estrategias}
+
+Para poder resolver el problema lo mas rapido posible, en primer lugar buscamos una forma rapida de verificar si el conjunto actual al llamar la funcion recursiva es un cubriimiento. Esto lo resolvimos simplemente haciendo que la funcion backtracking lleve la cuenta del total de nodos alcanzables por el cubrimiento. Si ese numero es igual al numero total de nodos, significa que llegamos a un cubrimiento. De esta manera evitamos funciones auxiliiares.
+
+Ademas, antes de comenzar la búsqueda agregamos a todos los vértices de $d(v) = 0$ al conjunto solución final. Esto se debe a que estos vértices necesariamente estarán en la solución. Es muy simple probar esto, dado que si no lo estuvieran, algún vértice adyacente debería estar en el conjunto para que lo cubra. Sin embargo, tal vértice no existe.
+
+Una poda muy común que también hemos implementado es la de la solución local actual. Dada una solución posible (que aun no sabemos si es la mínima), si en el estado actual del algoritmo se esta considerando un numero de vértices que no le puede ganar a esta solución, ignoramos esa rama del árbol de estados posibles.
+
+Una estrategia natural también fue evitar los nodos adyacentes a los que ya agrego el algoritmo al potencial conjunto solución sean considerados. De esta forma mantenemos la independencia del conjunto y evitamos tener que agregar innecesariamente muchos nodos. Ademas, evitamos tener que programar una función que verifique la independencia del conjunto.
+
+\subsection{Complejidad}
+
+\subsection{Complejidad Espacial}
+Para la representación del grafo, utilizamos un arreglo de nodos. Cada nodo tiene una lista de adyacencia. Por lo tanto, la complejidad espacial de nuestro algoritmo es de \order{n + 2m}, donde $n$ es la cantidad total de vértices y $m$ la cantidad total de aristas.
+
+\subsection{Complejidad Temporal}
+Nuestro algoritmo, sin considerar las podas, recorre cada conjunto independiente dominante una vez. Cada vez que encuentra uno, lo guarda en una estructura auxiliar en \order{n}. Si todos los nodos tienen grado 0, son agregados automaticamente, y el algoritmo resuelve el problema en $n$ iteraciones.
+En el peor de los casos, el algoritmo recorre todos los conjuntos independientes y dominantes, comenzando con el de mayor cardinalidad. Cada vez que lo encuentra, actualiza la estructura donde guardamos la solución. Para que esto suceda, en realidad todos los conjuntos dominantes deben tener diferente cardinalidad, cosa que en general no sucede. Sin embargo, como base pensemos que si. Moon \& Moser probaron que un grafo de $n$ vértices tiene a lo sumo $3^{n/3}$ conjuntos independientes y dominantes 
+\footnote{Moon, J. W.; Moser, Leo (1965), 'On cliques in graphs', Israel Journal of Mathematics 3 (1): 23–28, doi:10.1007/BF02760024}. Por lo tanto, una cota no muy buena para la actualización de soluciones locales es \order{n \times 3^{n/3}}.
+
+Por otro lado, recorremos cada vértice y sus aristas adyacentes una vez por iteracion. Sin embargo hay muchas combinaciones en las que podemos hacer esto. En total, en el peor de los casos sin la poda del minimo, la cantidad de nodos recorridos esta acotada por $2^n$.
+
+Por lo tanto, el orden del algoritmo es de \order{n \times 3^{n/3}}.
