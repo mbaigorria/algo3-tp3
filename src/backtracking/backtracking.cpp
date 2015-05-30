@@ -39,15 +39,20 @@ int main() {
 		graph[v].degree++;
 	}
 
-	cout << graph[0].degree;
-
 	backtracking(0, n, 0, 0, graph, localSolution, nodesUsed);
+
+	cout << nodesUsed;
+	for (int i = 0; i < n; ++i) {
+		if (localSolution[i] == true) cout << " " << i + 1;
+	}
+	cout << endl;
 
 	return 0;
 }
 
 void backtracking(int current, int n, int covered, int usedNodes, Node graph[], bool localSolution[], int& nodesUsed) {
-	if (graph[current].reachable == true) return backtracking((current++), n, covered, usedNodes, graph, localSolution, nodesUsed);
+	// cout << "current: " << current << " n: " << n << " covered: " << covered << " usedNodes: " << usedNodes << " nodesUsed: " << nodesUsed <<  endl;
+	if (graph[current].reachable == true) return backtracking(current + 1, n, covered, usedNodes, graph, localSolution, nodesUsed);
 	if (current == n) return;
 	if (nodesUsed == usedNodes + 1) return;
 
@@ -63,13 +68,13 @@ void backtracking(int current, int n, int covered, int usedNodes, Node graph[], 
 		}
 	}
 
-	if ((covered + pushed + 1) == n) { // load local solution
+	if ((covered + pushed + 1) == n) { // coverage found
 		for (int i = 0; i < n; ++i) {
 			localSolution[i] = graph[i].added;
 		}
 		nodesUsed = usedNodes++;
 	} else {
-		backtracking((current++), n, (covered + pushed + 1), (usedNodes + 1), graph, localSolution, nodesUsed); // adding current element to coverage
+		backtracking(current + 1, n, (covered + pushed + 1), (usedNodes + 1), graph, localSolution, nodesUsed); // adding current element to coverage
 	}
 
 	graph[current].added = false;
@@ -78,6 +83,6 @@ void backtracking(int current, int n, int covered, int usedNodes, Node graph[], 
 		graph[*it].reachable = false;
 	}
 
-	backtracking((current++), n, covered, usedNodes, graph, localSolution, nodesUsed);
+	backtracking(current + 1, n, covered, usedNodes, graph, localSolution, nodesUsed);
 
 }
