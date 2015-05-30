@@ -21,13 +21,15 @@ Un conjunto \textit{conjunto independiente dominante} de $G$ es un conjunto inde
 Un \textit{Conjunto Independiente Dominante Mínimo} (CIDM) es el conjunto independiente dominante de $G$ de mínima cardinalidad.
 \end{definition}
 
+Mostrar como el CIDM y el CDM no son necesariamente los mismos, y de ser posible mostrar que hasta pueden tener diferente cardinalidad.
+
 Cada definición debería ser acompañada con un gráfico. Por ejemplo, podemos mostrar dos conjuntos independientes y dominantes del mismo grafo, donde uno ese el CIDM.
 
 \subsection{Introducción}
 En 1979, Garey y Johnson probaron que el problema de encontrar el CIDM de un grafo es un problema NP-Hard\footnote{M.R. Garey, D.S. Johnson, Computers and Intractability: A Guide to the Theory of NP-Completeness, Freeman and Company, San Francisco (1979).}.
 El objetivo del trabajo es utilizar diferentes técnicas algorítmicas para resolver este problema. En un principio diseñaremos e implementaremos un algoritmo exacto para el mismo. Dada la complejidad del problema, luego propondremos diferentes algoritmos heurísticos para llegar a una solución que sea lo suficientemente buena a fines prácticos en un tiempo razonable.
 
-Si recordamos el problema 3 del TP1, podemos ver claramente que el mismo es un caso particular del problema del conjunto independiente dominante optimo. Esto se debe a que el problema de los caballos imponía cierta estructura sobre el grafo en el que se efectuaba la búsqueda. El grafo en si no era completo, dado que cada casilla era representada por un nodo, y un caballo no podía acceder a los nodos adyacentes. El movimiento de los caballos se modelaba con aristas entre nodos. En cambio, el problema de encontrar el CIDM se aplica a cualquier tipo de grafo. Dado que el problema de los caballos era computacionalmente costoso, podemos inferir, como ya lo confirma la literatura, que este problema se resolverá en tiempo no polinomial.
+Si recordamos el problema 3 del TP1, podemos ver claramente que el mismo es un caso particular del problema del conjunto dominante optimo. Esto se debe a que el problema de los caballos imponía cierta estructura sobre el grafo en el que se efectuaba la búsqueda. El grafo en si no era completo, dado que cada casilla era representada por un nodo, y un caballo no podía acceder a los nodos adyacentes. El movimiento de los caballos se modelaba con aristas entre nodos. En cambio, el problema de encontrar el CDM se aplica a cualquier tipo de grafo. Sin embargo, no es equivalente al problema del CIDM dado que la solución al problema no necesariamente era independiente. Dado que el problema de los caballos era computacionalmente costoso, considerando que la minimalidad no afecta mucho la estructura del problema podemos conjeturar, como ya lo confirma la literatura, que este problema se resolverá en tiempo no polinomial.
 
 \subsection{Maximalidad y dominancia}
 
