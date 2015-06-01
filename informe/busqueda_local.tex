@@ -1,1 +1,16 @@
 \section{Heurística de Búsqueda Local}
+
+\subsection{Algoritmo}
+
+El algoritmo propuesto sigue los siguientes pasos:
+
+\begin{enumerate}
+\item Utilizando la heuristica constructiva golosa, armamos una potencial solución factible $s \in S$. También es posible tomar la primera solución encontrada por backtracking.
+\item A continuacion, construimos un posible vecino $s' \in N(s)$. Para ello, primero tomamos un nodo del cubrimiento, y lo sacamos.
+\item Tomamos todos los nodos adyacentes a ese nodo, y los agregamos al conjunto solución.
+\item Para mantener la independencia, quitamos todos los nodos adyacentes a los nuevos nodos.
+\item A medida que recorremos los nodos, vamos marcando si los hemos manipulado durante el procedimiento.
+\item Si la nueva solución $s'$ es mejor, intercambiamos la solucion anterior $s$ por $s'$ y repetimos el paso 2. Caso contrario, finaliza el algoritmo.
+\end{enumerate}
+
+\subsection{Complejidad}
