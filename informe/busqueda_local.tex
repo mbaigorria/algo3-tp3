@@ -13,4 +13,6 @@ El algoritmo propuesto sigue los siguientes pasos:
 \item Si la nueva solución $s'$ es mejor, intercambiamos la solucion anterior $s$ por $s'$ y repetimos el paso 2. Caso contrario, finaliza el algoritmo.
 \end{enumerate}
 
+Notar que por cada componente conexa tenemos un solo vecino. La idea es ir probando con todas las componentes conexas. Si modificamos una vez un nodo, después cuando hagamos el proceso de tomar un nodo, lo tomamos de la lista de elementos que NO modificamos. Esto se ve claro en los ejemplos de la constructiva greedy.
+
 \subsection{Complejidad}
