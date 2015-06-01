@@ -18,7 +18,7 @@ Podríamos resolver el problema en \order{n \times log(n)} simplemente ignorando
 
 \subsection{Efectividad de la heurística}
 
-Nuestra heuristica no siempre devuelve la solucion optima. Considerar los siguientes ejemplos::
+Nuestra heuristica no siempre devuelve la solución optima. Considerar los siguientes ejemplos:
 
 \begin{figure}[ht]
 \centering
@@ -30,10 +30,7 @@ Nuestra heuristica no siempre devuelve la solucion optima. Considerar los siguie
 	\includegraphics[scale=0.6]{images/greedy_best.png}
 	\caption{Optimo (3 nodos)}
 \end{subfigure}
-\end{figure}
 
-\begin{figure}[ht]
-\centering
 \begin{subfigure}[b]{0.4\textwidth}
 	\includegraphics[scale=0.6]{images/greedy_fail2.png}
 	\caption{Greedy (9 nodos)}
@@ -44,3 +41,8 @@ Nuestra heuristica no siempre devuelve la solucion optima. Considerar los siguie
 \end{subfigure}
 \caption{Ejemplos de nuestra heuristica comparado con el optimo.}
 \end{figure}
+
+El peor caso es claramente el de la figura (c) y (d). Tenemos un nodo $v$ de grado $d(v) = n$, con sus nodos adyacentes de grado $d(u) = n - 1$. Si tenemos $c$ componentes conexas de ese tipo, utilizaremos $c \times (n \times (n-2) + 1)$ nodos, cuando en realidad el optimo tiene $c \times n$ nodos.
+
+
+
