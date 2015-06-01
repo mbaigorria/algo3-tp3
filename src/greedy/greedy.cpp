@@ -42,6 +42,12 @@ int main() {
 
 		int greatest = i;
 		unsigned int score = graph[i].score;
+
+		if (score == 0) {
+			graph[i].reachable = true;
+			graph[i].added     = true;
+		}
+
 		for (int j = 0; j < n; ++j) {
 			if (graph[j].reachable == true) continue;
 			if (graph[j].score > score) {
