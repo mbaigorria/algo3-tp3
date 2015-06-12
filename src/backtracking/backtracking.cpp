@@ -48,12 +48,10 @@ int main() {
 		}
 	}
 
-	nodesUsedInSolution -= initialNodes; // improve trim
-
-	backtracking(0, n, 0, 0, graph, localSolution, nodesUsedInSolution);
+	backtracking(0, n, initialNodes, initialNodes, graph, localSolution, nodesUsedInSolution);
 
 	// display solution
-	cout << nodesUsedInSolution + initialNodes;
+	cout << nodesUsedInSolution;
 	for (int i = 0; i < n; ++i) {
 		if (localSolution[i] == true) cout << " " << i + 1;
 	}
@@ -63,7 +61,7 @@ int main() {
 }
 
 void backtracking(int current, int& n, int coveredNodes, int usedNodes, Node graph[], bool localSolution[], int& nodesUsedInSolution) {
-	// cout << "current: " << current << " n: " << n << " coveredNodes: " << coveredNodes << " usedNodes: " << usedNodes << " nodesUsedInSolution: " << nodesUsedInSolution <<  endl;
+
 	if (graph[current].reachable == true) return backtracking(current + 1, n, coveredNodes, usedNodes, graph, localSolution, nodesUsedInSolution);
 	if (current == n) return; // no nodes left to add.
 	if (usedNodes + 1 == nodesUsedInSolution) return; // cant beat current solution
@@ -71,6 +69,7 @@ void backtracking(int current, int& n, int coveredNodes, int usedNodes, Node gra
 	int pushed = 0;
 	forward_list<int> added; // save changes to graph to then restore
 	graph[current].added = true;
+
 	for (auto it = graph[current].adj.begin(); it != graph[current].adj.end(); ++it) {
 		int adjNode = *it;
 		if (graph[adjNode].reachable == false) { // node reaches these new vertices
@@ -80,14 +79,14 @@ void backtracking(int current, int& n, int coveredNodes, int usedNodes, Node gra
 		}
 	}
 
-	int tempcoveredNodes = coveredNodes + pushed + 1;
-	if (tempcoveredNodes == n) { // coverage found
+	int tempCoveredNodes = coveredNodes + pushed + 1;
+	if (tempCoveredNodes == n) { // coverage found
 		for (int i = 0; i < n; ++i) {
 			localSolution[i] = graph[i].added;
 		}
 		nodesUsedInSolution = ++usedNodes;
 	} else {
-		backtracking(current + 1, n, tempcoveredNodes, usedNodes + 1, graph, localSolution, nodesUsedInSolution); // adding current element to coverage
+		backtracking(current + 1, n, tempCoveredNodes, usedNodes + 1, graph, localSolution, nodesUsedInSolution); // adding current element to coverage
 	}
 
 	// restore graph state
