@@ -39,17 +39,21 @@ int main() {
 		graph[v].degree++;
 	}
 
+	int initialNodes = 0;
 	for (int i = 1; i <= m; ++i) { // add d(v)=0 nodes to cover.
 		if (graph[i].degree == 0) {
 			graph[i].added = true;
 			graph[i].reachable = true;
+			initialNodes++;
 		}
 	}
+
+	nodesUsedInSolution -= initialNodes; // improve trim
 
 	backtracking(0, n, 0, 0, graph, localSolution, nodesUsedInSolution);
 
 	// display solution
-	cout << nodesUsedInSolution;
+	cout << nodesUsedInSolution + initialNodes;
 	for (int i = 0; i < n; ++i) {
 		if (localSolution[i] == true) cout << " " << i + 1;
 	}
