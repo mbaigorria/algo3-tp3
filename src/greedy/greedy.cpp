@@ -37,17 +37,17 @@ int main() {
 		graph[v].score++;
 	}
 
+	cout << "test" << endl;
+	cout << graph[0].score << endl;
+	cout << graph[1].score << endl;
+	cout << graph[2].score << endl;
+
 	for (int i = 0; i < n; ++i) {
-		if (graph[i].reachable == true) continue;
 
-		int greatest = i;
-		unsigned int score = graph[i].score;
+		int greatest = 0;
+		unsigned int score = 0;
 
-		if (score == 0) {
-			graph[i].reachable = true;
-			graph[i].added     = true;
-		}
-
+		// search for max score.
 		for (int j = 0; j < n; ++j) {
 			if (graph[j].reachable == true) continue;
 			if (graph[j].score > score) {
@@ -56,7 +56,9 @@ int main() {
 			}
 		}
 
-		graph[i].added = true;
+		if (score == 0) break; // no more nodes to search.
+
+		graph[greatest].added = true;
 
 		// update adyacent nodes of reachable nodes scores.
 		for (auto it = graph[greatest].adj.begin(); it != graph[greatest].adj.end(); ++it) {
