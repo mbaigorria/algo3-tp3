@@ -37,23 +37,30 @@ int main() {
 		graph[v].score++;
 	}
 
-	for (int i = 0; i < n; ++i) {
+	/* This script can be improved by:
+	 *    1. Using some sort of 'dynamic heap'.
+	 *    2. Not iterating degree 0 nodes.
+	 *    3. Using a list instead of an array, not to iterate
+	 		 through nodes that are not necessary.
+	*/
 
-		// cout << i << endl;
+	for (int i = 0; i < n; ++i) {
 
 		int greatest = 0;
 		unsigned int score = 0;
+		bool flag = false;
 
 		// search for max score.
 		for (int j = 0; j < n; ++j) {
 			if (graph[j].reachable == true) continue;
-			if (graph[j].score > score) {
+			if (graph[j].score >= score) { // can be improved here!
 				greatest = j;
 				score    = graph[j].score;
+				flag = true;
 			}
 		}
 
-		if (score == 0) break; // no more nodes to search.
+		if (!flag) break; // no more nodes to search.
 
 		graph[greatest].added = true;
 		graph[greatest].reachable = true;
