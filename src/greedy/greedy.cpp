@@ -37,11 +37,6 @@ int main() {
 		graph[v].score++;
 	}
 
-	cout << "test" << endl;
-	cout << graph[0].score << endl;
-	cout << graph[1].score << endl;
-	cout << graph[2].score << endl;
-
 	for (int i = 0; i < n; ++i) {
 
 		int greatest = 0;
