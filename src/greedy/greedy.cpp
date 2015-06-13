@@ -39,6 +39,8 @@ int main() {
 
 	for (int i = 0; i < n; ++i) {
 
+		// cout << i << endl;
+
 		int greatest = 0;
 		unsigned int score = 0;
 
@@ -54,6 +56,7 @@ int main() {
 		if (score == 0) break; // no more nodes to search.
 
 		graph[greatest].added = true;
+		graph[greatest].reachable = true;
 
 		// update adyacent nodes of reachable nodes scores.
 		for (auto it = graph[greatest].adj.begin(); it != graph[greatest].adj.end(); ++it) {
