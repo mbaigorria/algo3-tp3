@@ -2,17 +2,36 @@
 
 \subsection{Algoritmo}
 
-El algoritmo propuesto sigue los siguientes pasos:
+Antes de explicar nuestro algoritmo, comenzemos definiendo que es una heurística de Búsqueda Local. Para cada solución factible $s \in S$, se define $N(s)$ como el conjunto de soluciones vecinas de $s$. Un procedimiento de búsqueda local toma una solución inicial $s$ e iterativamente la mejora reemplazándola por otra solución mejor del conjunto $N(s)$, hasta llegar a un optimo local. El algoritmo se puede ver con el siguiente pseudocodigo:
+
+\begin{algorithmic}
+\Procedure{localSearch}{G}
+\State{s $\gets$ getInitialSolution(G)}
+\State{bool localSolution $\gets$ true}
+\While{localSolution}
+	\State{$localSolution \gets false$}
+	\ForAll{$\hat{s} \in N(s)$}
+		\If{$|\hat{s}| < |s|$}
+			\State{$s \gets \hat{s}$}
+			\State{$localSolution \gets true$}
+			\State{break}
+		\EndIf
+	\EndFor
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+\hspace{1px}
+
+En primer lugar hay que pensar que algoritmo utilizar en la funcion $getInitialSolution(G)$. Para esto, utilizamos la heurística constructiva golosa del paso anterior.
+
+Luego, debemos identificar como construiremos las diferentes $s \in N(s)$, es decir, como construiremos la función que nos devuelve los vecinos de una solución parcial $N(S)$. Para ello, seguiremos el siguiente procedimiento:
 
 \begin{enumerate}
-\item Utilizando la heuristica constructiva golosa, armamos una potencial solución factible $s \in S$. También es posible tomar la primera solución encontrada por backtracking.
-\item A continuacion, construimos un posible vecino $s' \in N(s)$. Para ello, primero tomamos un nodo del cubrimiento, y lo sacamos.
+\item Tomamos un nodo del conjunto solución actual y lo quitamos.
 \item Tomamos todos los nodos adyacentes a ese nodo, y los agregamos al conjunto solución.
 \item Para mantener la independencia, quitamos todos los nodos adyacentes a los nuevos nodos.
 \item A medida que recorremos los nodos, vamos marcando si los hemos manipulado durante el procedimiento.
-\item Si la nueva solución $s'$ es mejor, intercambiamos la solucion anterior $s$ por $s'$ y repetimos el paso 2. Caso contrario, finaliza el algoritmo.
 \end{enumerate}
-
-Notar que por cada componente conexa tenemos un solo vecino. La idea es ir probando con todas las componentes conexas. Si modificamos una vez un nodo, después cuando hagamos el proceso de tomar un nodo, lo tomamos de la lista de elementos que NO modificamos. Esto se ve claro en los ejemplos de la constructiva greedy.
 
 \subsection{Complejidad}
