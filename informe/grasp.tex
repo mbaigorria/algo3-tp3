@@ -2,4 +2,21 @@
 
 \subsection{Algoritmo}
 
-\subsection{Complejidad}
+GRASP (Greedy Randomized Adaptative Search Procedure) es una combinación entre una heuristica golosa aleatorizada y un procedimiento de búsqueda local. La metaheurística se puede ver con el siguiente pseudocódigo:
+
+\begin{algorithmic}
+\Procedure{grasp}{G}
+\While{$!terminationCondition()$}
+	\State{s $\gets$ randomGreedyHeuristic(G)}
+	\State{s $\gets$ localSearch(G,s)}
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+De este procedimiento surgen dos preguntas, que en realidad son cosas que debemos definir. De donde proviene la aleatoriedad de la heurística greedy? Cual es criterio de terminación que utilizaremos?
+
+\subsubsection{Random Greedy Heuristic}
+
+RCL (Restricted Candidate List)
+
+\subsubsection{Criterio de terminación}
