@@ -37,12 +37,12 @@ int main() {
 		graph[v].score++;
 	}
 
-	/* This script can be improved by:
+	/** This script can be improved by:
 	 *    1. Using some sort of 'dynamic heap'.
 	 *    2. Not iterating degree 0 nodes.
 	 *    3. Using a list instead of an array, not to iterate
-	 		 through nodes that are not necessary.
-	*/
+	 *		 through nodes that are not necessary.
+	 */
 
 	for (int i = 0; i < n; ++i) {
 
