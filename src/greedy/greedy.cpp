@@ -18,13 +18,15 @@ struct Node {
 
 };
 
+void displaySolution(Node graph[], int n, int nodesUsedInSolution);
+int greedyConstructive(Node graph[], int n);
+
 int main() {
 
 	int n, m; // n: vertices, m: edges
 	cin >> n >> m;
 
 	Node graph[n]; // graph container
-	int nodesUsedInSolution = 0;
 	
 	int u, v;
 	for (int i = 1; i <= m; ++i) { // (u,v) edges
@@ -37,12 +39,40 @@ int main() {
 		graph[v].score++;
 	}
 
-	/** This script can be improved by:
-	 *    1. Using some sort of 'dynamic heap'.
-	 *    2. Not iterating degree 0 nodes.
-	 *    3. Using a list instead of an array, not to iterate
-	 *		 through nodes that are not necessary.
-	 */
+	int initialNodes = 0;
+	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
+		if (graph[i].score == 0) {
+			graph[i].added = true;
+			graph[i].reachable = true;
+			initialNodes++;
+		}
+	}
+
+	int nodesUsedInSolution = greedyConstructive(graph, n);
+
+	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
+
+	return 0;
+}
+
+void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
+	cout << nodesUsedInSolution;
+	for (int i = 0; i < n; ++i) {
+		if (graph[i].added == true) cout << " " << i + 1;
+	}
+	cout << endl;
+}
+
+/** 
+* This function can be improved by:
+* 1. Using some sort of 'dynamic heap'.
+* 2. Not iterating degree 0 nodes.
+* 3. Using a list instead of an array, not to iterate
+*    through nodes that are not necessary.
+*/
+int greedyConstructive(Node graph[], int n) {
+
+	int nodesUsedInSolution = 0;
 
 	for (int i = 0; i < n; ++i) {
 
@@ -77,12 +107,5 @@ int main() {
 		nodesUsedInSolution++;
 	}
 
-	// display solution
-	cout << nodesUsedInSolution;
-	for (int i = 0; i < n; ++i) {
-		if (graph[i].added == true) cout << " " << i + 1;
-	}
-	cout << endl;
-
-	return 0;
+	return nodesUsedInSolution;
 }

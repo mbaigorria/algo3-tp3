@@ -24,9 +24,7 @@ int main() {
 	cin >> n >> m;
 
 	Node graph[n]; // graph container
-	
 	bool localSolution[n];
-	int nodesUsedInSolution = n; // worst case scenario is n, that way I avoid setting all the array as true.
 	
 	int u, v;
 	for (int i = 1; i <= m; ++i) { // (u,v) edges
@@ -40,13 +38,16 @@ int main() {
 	}
 
 	int initialNodes = 0;
-	for (int i = 1; i <= m; ++i) { // add d(v)=0 nodes to cover.
+	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
 		if (graph[i].degree == 0) {
 			graph[i].added = true;
 			graph[i].reachable = true;
+			localSolution[i] = true;
 			initialNodes++;
 		}
 	}
+
+	int nodesUsedInSolution = n; // worst case scenario is n, that way I avoid setting all the array as true.
 
 	backtracking(0, n, initialNodes, initialNodes, graph, localSolution, nodesUsedInSolution);
 
