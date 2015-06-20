@@ -5,21 +5,23 @@
 using namespace std;
 
 struct Node {
-	forward_list<int> adj;
+	unsigned int degree;
 	unsigned int score;
 	bool added;
 	bool reachable;
+	forward_list<int> adj;
 
 	Node() {
+		degree = 0;
 		score = 0;
 		added = false;
 		reachable = false;
 	}
-
 };
 
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
 int greedyConstructive(Node graph[], int n);
+int greedyHeapConstructive(Node graph[], int n);
 
 int main() {
 
@@ -35,13 +37,16 @@ int main() {
 		v--;
 		graph[u].adj.push_front(v);
 		graph[v].adj.push_front(u);
+
+		graph[u].degree++;
+		graph[v].degree++;
 		graph[u].score++;
 		graph[v].score++;
 	}
 
 	int initialNodes = 0;
 	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
-		if (graph[i].score == 0) {
+		if (graph[i].degree == 0) {
 			graph[i].added = true;
 			graph[i].reachable = true;
 			initialNodes++;
@@ -61,6 +66,17 @@ void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
 		if (graph[i].added == true) cout << " " << i + 1;
 	}
 	cout << endl;
+}
+
+int greedyHeapConstructive(Node graph[], int n) {
+
+	vector<Node> v(graph, graph + sizeof graph / sizeof graph[0]);
+	make_heap(v.begin(),v.end());
+
+	// ooops, yo usaba el orden para identificar el nodo. la cague.
+	// hay dos opciones... cargar ID, y tener un puntero a los adj.
+	// usar el otro metodo, iterar bastante...
+	// ouch.
 }
 
 /** 
@@ -95,7 +111,7 @@ int greedyConstructive(Node graph[], int n) {
 		graph[greatest].added = true;
 		graph[greatest].reachable = true;
 
-		// update adyacent nodes of reachable nodes scores.
+		// update adyacent nodes of reachable nodes' scores.
 		for (auto it = graph[greatest].adj.begin(); it != graph[greatest].adj.end(); ++it) {
 			int adjNode = *it;
 			graph[adjNode].reachable = true;

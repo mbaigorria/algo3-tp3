@@ -4,17 +4,18 @@
 using namespace std;
 
 struct Node {
-	forward_list<int> adj;
+	unsigned int degree;
 	unsigned int score;
 	bool added;
 	bool reachable;
-
+	forward_list<int> adj;
+	
 	Node() {
+		degree = 0;
 		score = 0;
 		added = false;
 		reachable = false;
 	}
-
 };
 
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
@@ -35,13 +36,16 @@ int main() {
 		v--;
 		graph[u].adj.push_front(v);
 		graph[v].adj.push_front(u);
+
+		graph[u].degree++;
+		graph[v].degree++;
 		graph[u].score++;
 		graph[v].score++;
 	}
 
 	int initialNodes = 0;
 	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
-		if (graph[i].score == 0) {
+		if (graph[i].degree == 0) {
 			graph[i].added = true;
 			graph[i].reachable = true;
 			initialNodes++;
@@ -110,7 +114,7 @@ int localSearch(Node graph[], int n, int nodesUsedInSolution) {
     int currentNodes = nodesUsedInSolution;
 
     for (int i = 0; i < n; ++i) {
-        if (graph[i].added == false) continue; // search for an added node
+        if (graph[i].added == false || graph[i].degree == 1) continue; // search for an added node
 
         graph[i].added = false;
         currentNodes--;
@@ -138,8 +142,7 @@ int localSearch(Node graph[], int n, int nodesUsedInSolution) {
             for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) graph[*it].added = false;
         } else {
             nodesUsedInSolution = currentNodes;
-            i = 0;
-            cout << "yey!";
+            i = 0; // restart search with new graph
         }
     }
 

@@ -4,13 +4,15 @@
 using namespace std;
 
 struct Node {
-	forward_list<int> adj;
 	unsigned int degree;
+	unsigned int score;
 	bool added;
 	bool reachable;
-
+	forward_list<int> adj;
+	
 	Node() {
 		degree = 0;
+		score = 0;
 		added = false;
 		reachable = false;
 	}
@@ -25,7 +27,7 @@ int main() {
 
 	Node graph[n]; // graph container
 	bool localSolution[n];
-	
+
 	int u, v;
 	for (int i = 1; i <= m; ++i) { // (u,v) edges
 		cin >> u >> v;
@@ -33,6 +35,7 @@ int main() {
 		v--;
 		graph[u].adj.push_front(v);
 		graph[v].adj.push_front(u);
+		
 		graph[u].degree++;
 		graph[v].degree++;
 	}
