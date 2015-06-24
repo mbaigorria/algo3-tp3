@@ -2,7 +2,7 @@
 
 \subsection{Algoritmo}
 
-Antes de explicar nuestro algoritmo, comenzemos definiendo que es una heurística de Búsqueda Local. Para cada solución factible $s \in S$, se define $N(s)$ como el conjunto de soluciones vecinas de $s$. Un procedimiento de búsqueda local toma una solución inicial $s$ e iterativamente la mejora reemplazándola por otra solución mejor del conjunto $N(s)$, hasta llegar a un optimo local. El algoritmo se puede ver con el siguiente pseudocodigo:
+Antes de explicar nuestro algoritmo, comenzemos definiendo que es una heurística de búsqueda local. Para cada solución factible $s \in S$, se define $N(s)$ como el conjunto de soluciones vecinas de $s$. Un procedimiento de búsqueda local toma una solución inicial $s$ e iterativamente la mejora reemplazándola por otra solución mejor del conjunto $N(s)$, hasta llegar a un optimo local. El algoritmo se puede ver con el siguiente pseudocodigo:
 
 \begin{algorithmic}
 \Procedure{localSearch}{G}
@@ -23,15 +23,17 @@ Antes de explicar nuestro algoritmo, comenzemos definiendo que es una heurístic
 
 \hspace{1px}
 
-En primer lugar hay que pensar que algoritmo utilizar en la funcion $getInitialSolution(G)$. Para esto, utilizamos la heurística constructiva golosa del paso anterior.
+En primer lugar hay que pensar que algoritmo utilizar en la función $getInitialSolution(G)$. Para esto, utilizamos la heurística constructiva golosa con score del paso anterior. Sin embargo también podemos utilizar la que se basa en un heap o se puede modificar backtracking para que tome la primera solución que encuentra.
 
 Luego, debemos identificar como construiremos las diferentes $s \in N(s)$, es decir, como construiremos la función que nos devuelve los vecinos de una solución parcial $N(S)$. Para ello, seguiremos el siguiente procedimiento:
 
 \begin{enumerate}
 \item Tomamos un nodo del conjunto solución actual y lo quitamos.
-\item Tomamos todos los nodos adyacentes a ese nodo, y los agregamos al conjunto solución.
-\item Para mantener la independencia, quitamos todos los nodos adyacentes a los nuevos nodos.
-\item A medida que recorremos los nodos, vamos marcando si los hemos manipulado durante el procedimiento.
+\item Tomamos todos los nodos adyacentes a ese nodo, y los agregamos al conjunto solución si no existe otro nodo que lo pueda alcanzar. De esta manera mantenemos la independencia.
+\item Si no agregamos a ningún nodo adyacente, al quitar el nodo ya no tenemos un cubrimiento, por lo que lo descartamos.
 \end{enumerate}
 
 \subsection{Complejidad}
+
+En una iteración, nuestro algoritmo a lo sumo toma cada nodo del cubrimiento. Por lo tanto, en el peor caso una iteración tiene orden \order{n \times m^2}. Esto se debe a que se deben checkear todos los nodos adyacentes del que saque, y luego se debe verificar si ese nodo adicional tiene algun nodo adyacente perteneciente al cubrimiento. 
+\textbf{NOTA: Puedo reemplazar m por el máximo grado en el grafo.}
