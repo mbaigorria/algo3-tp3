@@ -29,7 +29,7 @@ struct _Pair {
 	}
 
 	bool operator <(const _Pair& x) {
-    	return this->score < x.score;
+		return this->score < x.score;
 	}
 
 };
@@ -99,7 +99,7 @@ int greedyHeapConstructive(Node graph[], int n) {
 		_Pair p = heap.front();
 		pop_heap(heap.begin(), heap.end());
 		heap.pop_back();
-		
+
 		if (graph[p.id].reachable == true) continue;
 
 		graph[p.id].added = true;
