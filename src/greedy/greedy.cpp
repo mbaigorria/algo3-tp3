@@ -5,8 +5,8 @@
 using namespace std;
 
 struct Node {
-	unsigned int degree;
-	unsigned int score;
+	int degree;
+	int score;
 	bool added;
 	bool reachable;
 	forward_list<int> adj;
@@ -17,6 +17,21 @@ struct Node {
 		added = false;
 		reachable = false;
 	}
+};
+
+struct _Pair {
+	int score;	
+	int id;
+
+	_Pair(int _score, int _id) {
+		score = _score;
+		id = _id;
+	}
+
+	bool operator <(const _Pair& x) {
+    	return this->score < x.score;
+	}
+
 };
 
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
@@ -54,6 +69,7 @@ int main() {
 	}
 
 	int nodesUsedInSolution = greedyConstructive(graph, n);
+	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
 
 	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
 
@@ -70,13 +86,32 @@ void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
 
 int greedyHeapConstructive(Node graph[], int n) {
 
-	vector<Node> v(graph, graph + sizeof graph / sizeof graph[0]);
-	make_heap(v.begin(),v.end());
+	vector<_Pair> heap;
+	int nodesUsed = 0;
 
-	// ooops, yo usaba el orden para identificar el nodo. la cague.
-	// hay dos opciones... cargar ID, y tener un puntero a los adj.
-	// usar el otro metodo, iterar bastante...
-	// ouch.
+	for (int i = 0; i < n; i++) {
+		if (graph[i].added == false)
+			heap.push_back(_Pair(graph[i].score, i));
+	}
+	make_heap(heap.begin(), heap.end());
+
+	for (int i = 0; i < n; i++) {
+		_Pair p = heap.front();
+		pop_heap(heap.begin(), heap.end());
+		heap.pop_back();
+		
+		if (graph[p.id].reachable == true) continue;
+
+		graph[p.id].added = true;
+		nodesUsed++;
+
+		for (auto it = graph[p.id].adj.begin(); it != graph[p.id].adj.end(); ++it) {
+			int adjNode = *it;
+			graph[adjNode].reachable = true;
+		}
+	}
+
+	return nodesUsed;
 }
 
 /** 
@@ -93,7 +128,7 @@ int greedyConstructive(Node graph[], int n) {
 	for (int i = 0; i < n; ++i) {
 
 		int greatest = 0;
-		unsigned int score = 0;
+		int score = 0;
 		bool flag = false;
 
 		// search for max score.
