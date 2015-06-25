@@ -21,6 +21,8 @@ struct Node {
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
 int greedyConstructive(Node graph[], int n);
 int localSearch(Node graph[], int n, int nodesUsedInSolution);
+int localSearch2(Node graph[], int n, int nodesUsedInSolution);
+bool belongsTo(forward_list<int> adj, int x);
 
 int main() {
 
@@ -54,7 +56,7 @@ int main() {
 
 	int nodesUsedInSolution = greedyConstructive(graph, n);
 
-	nodesUsedInSolution = localSearch(graph, n, nodesUsedInSolution);
+	nodesUsedInSolution = localSearch2(graph, n, nodesUsedInSolution);
 
 	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
 
@@ -121,6 +123,9 @@ int localSearch(Node graph[], int n, int nodesUsedInSolution) {
         bool reachable;
 
 		for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+
+			if (graph[*it].added == false) continue; // we already know its reachable.
+
 			reachable = false; // flag that indicates if all removed nodes are reachable.
 
 			int adjNode = *it;
@@ -149,4 +154,87 @@ int localSearch(Node graph[], int n, int nodesUsedInSolution) {
     }
 
     return nodesUsedInSolution;
+}
+
+int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
+
+    int currentNodes = nodesUsedInSolution;
+
+    for (int i = 0; i < n; ++i) {
+
+    	// find index of two nodes not in S.
+        if (graph[i].added == true || graph[i].degree == 1) continue;
+
+        int j;
+        for (j = i + 1; j < n; j++) { // search for a second node
+        	if (graph[j].added == true || graph[j].degree == 1) continue;
+        }
+
+        if (j == n) return nodesUsedInSolution; // no pair found
+
+        // check if S with these 2 nodes and without adj nodes is a 'better' cover.
+        currentNodes = currentNodes + 2;
+        bool reachable;
+
+		for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+
+			reachable = false; // flag that indicates if all removed nodes are reachable.
+
+			int adjNode = *it;
+			currentNodes--;
+
+			for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
+				if (adjNode == *it2) continue;
+				if ((graph[*it2].added == true || *it2 == j) && !belongsTo(graph[j].adj, *it2)) { // if the adj to the adj is added, can remove safely.
+					reachable = true;
+					break;
+				}
+			}
+			if (reachable == false) break;
+		}
+
+		if (reachable == true) {
+
+			for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) {
+
+				reachable = false; // flag that indicates if all removed nodes are reachable.
+
+				int adjNode = *it;
+				currentNodes--;
+
+				for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
+					if (adjNode == *it2) continue;
+					if ((graph[*it2].added == true || *it2 == i) && !belongsTo(graph[i].adj, *it2)) { // if the adj to the adj is added, can remove safely.
+						reachable = true;
+						break;
+					}
+				}
+				if (reachable == false) break;
+			}
+		}
+
+		if (reachable == true && currentNodes < nodesUsedInSolution) { // build graph once we know we can improve it.
+			graph[i].added = true;
+			graph[j].added = true;
+			for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+				graph[*it].added = false;
+			}
+			for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) {
+				graph[*it].added = false;
+			}
+			nodesUsedInSolution = currentNodes;
+			i = 0; // s <- s'
+		} else {
+			currentNodes = nodesUsedInSolution;
+		}
+    }
+
+    return nodesUsedInSolution;
+}
+
+bool belongsTo(forward_list<int> adj, int x) {
+	for (auto it = adj.begin(); it != adj.end(); ++it) {
+		if (*it == x) return true;
+	}
+	return false;
 }
