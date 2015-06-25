@@ -109,41 +109,43 @@ int greedyConstructive(Node graph[], int n) {
 	return nodesUsedInSolution;
 }
 
+
 int localSearch(Node graph[], int n, int nodesUsedInSolution) {
 
     int currentNodes = nodesUsedInSolution;
 
     for (int i = 0; i < n; ++i) {
-        if (graph[i].added == false || graph[i].degree == 1) continue; // search for an added node
+        if (graph[i].added == true || graph[i].degree == 1) continue; // search for a node not in S.
+        currentNodes++;
 
-        graph[i].added = false;
-        currentNodes--;
-        bool flagAdj = false; // flag that indicates if an adyacent node of the removed node was added.
+        bool reachable;
 
-        for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
-            int adjNode = *it;
-            graph[adjNode].added = true;
-            currentNodes++;
+		for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+			reachable = false; // flag that indicates if all removed nodes are reachable.
 
-            for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
-                if(graph[*it2].added == true){
-                    graph[adjNode].added = false;
-                    currentNodes--;
-                    break;
-                }
-            }
-            if (graph[adjNode].added == true) flagAdj = true; // added an adyacent node?
-        }
+			int adjNode = *it;
+			currentNodes--;
 
-        // restore graph (either its a worst graph or its not a cover)
-        if (nodesUsedInSolution <= currentNodes || !flagAdj) {
-            graph[i].added = true;
-            currentNodes = nodesUsedInSolution;
-            for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) graph[*it].added = false;
-        } else {
-            nodesUsedInSolution = currentNodes;
-            i = 0; // restart search with new graph
-        }
+			for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
+				if (adjNode == *it2) continue;
+				if (graph[*it2].added == true) { // if the adj to the adj is added, can remove safely.
+					reachable = true;
+					break;
+				}
+			}
+			if (reachable == false) break;
+		}
+
+		if (reachable == true && currentNodes < nodesUsedInSolution) { // build graph once we know we can improve it.
+			graph[i].added = true;
+			for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+				graph[*it].added = false;
+			}
+			nodesUsedInSolution = currentNodes;
+			i = 0; // s <- s'
+		} else {
+			currentNodes = nodesUsedInSolution;
+		}
     }
 
     return nodesUsedInSolution;
