@@ -17,6 +17,16 @@ De este procedimiento surgen dos preguntas, que en realidad son cosas que debemo
 
 \subsubsection{Random Greedy Heuristic}
 
-RCL (Restricted Candidate List)
+\begin{enumerate}
+\item Por cantidad:
+Para agregarle una componente aleatoria a \texttt{GRASP}, se propone fabricar en cada paso de la heurística constructiva golosa una \textit{Lista Restricta de Candidatos} (RCL) y elegir aleatoriamente un candidato de esta lista. Para ello, decidimos crear la función \texttt{greedyHeapConstructiveRandomized(Node graph[], int n, int k)} que lo que hace es ir eligiendo los $k$ vértices con mayor grado utilizando un heap como estructura auxiliar.
+\item Por valor: \textbf{TODO (programarlo también, es un toque)}
+\end{enumerate}
 
 \subsubsection{Criterio de terminación}
+\begin{enumerate}
+\item No se encontró ninguna mejora en las ultimas $j$ iteraciones.
+\item Se alcanzo un limite prefijado de  $j$ iteraciones.
+\end{enumerate}
+
+\textbf{2x2x2, tenes 4 experimentaciones posibles combinando esto, x2 con las dos localidades definidas (hay que testear, mejorar y corregir eso)}

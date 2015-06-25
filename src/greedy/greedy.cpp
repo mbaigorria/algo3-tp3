@@ -121,7 +121,7 @@ int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
 		// cout << "node id " << p.id << endl;
 
 		if (heap.size() > 0) {
-			cout << heap.size() << endl;
+			// cout << heap.size() << endl;
 			_Pair p2 = heap.front();
 			currentPicks.push_back(p2);
 			pop_heap(heap.begin(), heap.end());

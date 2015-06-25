@@ -20,6 +20,7 @@ struct Node {
 
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
 int greedyConstructive(Node graph[], int n);
+int greedyHeapConstructive(Node graph[], int n);
 int localSearch(Node graph[], int n, int nodesUsedInSolution);
 int localSearch2(Node graph[], int n, int nodesUsedInSolution);
 bool belongsTo(forward_list<int> adj, int x);
@@ -55,7 +56,8 @@ int main() {
 	}
 
 	int nodesUsedInSolution = greedyConstructive(graph, n);
-
+	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
+	
 	nodesUsedInSolution = localSearch2(graph, n, nodesUsedInSolution);
 
 	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
@@ -111,6 +113,35 @@ int greedyConstructive(Node graph[], int n) {
 	return nodesUsedInSolution;
 }
 
+int greedyHeapConstructive(Node graph[], int n) {
+
+	vector<_Pair> heap;
+	int nodesUsed = 0;
+
+	for (int i = 0; i < n; i++) {
+		if (graph[i].added == false)
+			heap.push_back(_Pair(graph[i].score, i));
+	}
+	make_heap(heap.begin(), heap.end());
+
+	for (int i = 0; i < n; i++) {
+		_Pair p = heap.front();
+		pop_heap(heap.begin(), heap.end());
+		heap.pop_back();
+
+		if (graph[p.id].reachable == true) continue;
+
+		graph[p.id].added = true;
+		nodesUsed++;
+
+		for (auto it = graph[p.id].adj.begin(); it != graph[p.id].adj.end(); ++it) {
+			int adjNode = *it;
+			graph[adjNode].reachable = true;
+		}
+	}
+
+	return nodesUsed;
+}
 
 int localSearch(Node graph[], int n, int nodesUsedInSolution) {
 
