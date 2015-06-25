@@ -25,12 +25,17 @@ Antes de explicar nuestro algoritmo, comenzemos definiendo que es una heurístic
 
 En primer lugar hay que pensar que algoritmo utilizar en la función $getInitialSolution(G)$. Para esto, utilizamos la heurística constructiva golosa con score del paso anterior. Sin embargo también podemos utilizar la que se basa en un heap o se puede modificar backtracking para que tome la primera solución que encuentra.
 
-Luego, debemos identificar como construiremos las diferentes $s \in N(s)$, es decir, como construiremos la función que nos devuelve los vecinos de una solución parcial $N(S)$. Para ello, seguiremos el siguiente procedimiento:
+Luego, debemos identificar como construiremos las diferentes $s \in N(s)$, es decir, como construiremos la función que nos devuelve los vecinos de una solución parcial $N(S)$.
+
+\subsection{Vecindades}
+
+Para este algoritmo, utilizaremos los siguientes dos criterios para definir la vecindad de una solución $s$:
 
 \begin{enumerate}
-\item Tomamos un nodo del conjunto solución actual y lo quitamos.
-\item Tomamos todos los nodos adyacentes a ese nodo, y los agregamos al conjunto solución si no existe otro nodo que lo pueda alcanzar. De esta manera mantenemos la independencia.
-\item Si no agregamos a ningún nodo adyacente, al quitar el nodo ya no tenemos un cubrimiento, por lo que lo descartamos.
+\item Primera vecindad:
+Para la primera vecindad simplemente tomamos un vértice que actualmente no pertenece a la solución local. Luego, quitamos todos sus vértices adyacentes y verificamos si tenemos una solución con menor cardinal.
+\item Segunda vecindad:
+Para este criterio, lo que hacemos es buscar dos nodos que no pertenecen a la solución local. Los agregamos, quitamos sus nodos adyacentes, y verificamos si el nuevo conjunto es un cubrimiento de menor cardinal.
 \end{enumerate}
 
 \subsection{Complejidad}

@@ -168,66 +168,71 @@ int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
         int j;
         for (j = i + 1; j < n; j++) { // search for a second node
         	if (graph[j].added == true || graph[j].degree == 1) continue;
-        }
 
-        if (j == n) return nodesUsedInSolution; // no pair found
+	        if (j == n) break; // no pair found
 
-        // check if S with these 2 nodes and without adj nodes is a 'better' cover.
-        currentNodes = currentNodes + 2;
-        bool reachable;
+	        // cout << "i: " << i << " j: " << j << endl;
 
-		for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+	        // check if S with these 2 nodes and without adj nodes is a 'better' cover.
+	        currentNodes = currentNodes + 2;
+	        bool reachable;
 
-			reachable = false; // flag that indicates if all removed nodes are reachable.
-
-			int adjNode = *it;
-			currentNodes--;
-
-			for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
-				if (adjNode == *it2) continue;
-				if ((graph[*it2].added == true || *it2 == j) && !belongsTo(graph[j].adj, *it2)) { // if the adj to the adj is added, can remove safely.
-					reachable = true;
-					break;
-				}
-			}
-			if (reachable == false) break;
-		}
-
-		if (reachable == true) {
-
-			for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) {
+			for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
 
 				reachable = false; // flag that indicates if all removed nodes are reachable.
 
 				int adjNode = *it;
-				currentNodes--;
+
+				if (graph[*it].added == true) currentNodes--; 
 
 				for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
 					if (adjNode == *it2) continue;
-					if ((graph[*it2].added == true || *it2 == i) && !belongsTo(graph[i].adj, *it2)) { // if the adj to the adj is added, can remove safely.
+					if ((graph[*it2].added == true || *it2 == j) && !belongsTo(graph[j].adj, *it2)) { // if the adj to the adj is added, can remove safely.
 						reachable = true;
 						break;
 					}
 				}
 				if (reachable == false) break;
 			}
-		}
 
-		if (reachable == true && currentNodes < nodesUsedInSolution) { // build graph once we know we can improve it.
-			graph[i].added = true;
-			graph[j].added = true;
-			for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
-				graph[*it].added = false;
+			if (reachable == true) {
+
+				for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) {
+
+					reachable = false; // flag that indicates if all removed nodes are reachable.
+
+					int adjNode = *it;
+					
+					if (graph[*it].added == true && !belongsTo(graph[i].adj, *it)) currentNodes--;
+
+					for (auto it2 = graph[adjNode].adj.begin(); it2 != graph[adjNode].adj.end(); ++it2) {
+						if (adjNode == *it2) continue;
+						if ((graph[*it2].added == true || *it2 == i) && !belongsTo(graph[i].adj, *it2)) { // if the adj to the adj is added, can remove safely.
+							reachable = true;
+							break;
+						}
+					}
+					if (reachable == false) break;
+				}
 			}
-			for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) {
-				graph[*it].added = false;
+
+			if (reachable == true && currentNodes < nodesUsedInSolution) { // build graph once we know we can improve it.
+				// cout << "currentNodes: " << currentNodes << " nodesUsedInSolution: " << nodesUsedInSolution << endl;
+				graph[i].added = true;
+				graph[j].added = true;
+				for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) {
+					graph[*it].added = false;
+				}
+				for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) {
+					graph[*it].added = false;
+				}
+				nodesUsedInSolution = currentNodes;
+				i = 0; // s <- s'
+			} else {
+				currentNodes = nodesUsedInSolution;
 			}
-			nodesUsedInSolution = currentNodes;
-			i = 0; // s <- s'
-		} else {
-			currentNodes = nodesUsedInSolution;
-		}
-    }
+	    }
+	}
 
     return nodesUsedInSolution;
 }

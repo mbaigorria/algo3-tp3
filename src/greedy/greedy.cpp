@@ -1,6 +1,7 @@
 #include <iostream>
 #include <forward_list>
 #include <algorithm>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -37,6 +38,7 @@ struct _Pair {
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
 int greedyConstructive(Node graph[], int n);
 int greedyHeapConstructive(Node graph[], int n);
+int greedyHeapConstructiveRandomized(Node graph[], int n, int k);
 
 int main() {
 
@@ -68,8 +70,9 @@ int main() {
 		}
 	}
 
-	int nodesUsedInSolution = greedyConstructive(graph, n);
+	// int nodesUsedInSolution = greedyConstructive(graph, n);
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
+	int nodesUsedInSolution = greedyHeapConstructiveRandomized(graph, n, 3);
 
 	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
 
@@ -82,6 +85,62 @@ void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
 		if (graph[i].added == true) cout << " " << i + 1;
 	}
 	cout << endl;
+}
+
+int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
+
+	if (k == 0) {
+		return 0;
+	}
+
+	vector<_Pair> currentPicks;
+	vector<_Pair> heap;
+	int nodesUsed = 0;
+
+	for (int i = 0; i < n; i++) {
+		if (graph[i].added == false)
+			heap.push_back(_Pair(graph[i].score, i));
+	}
+	make_heap(heap.begin(), heap.end());
+
+	int i = 0;
+	while (i < k && i < (int) heap.size()) {
+		_Pair p = heap.front();
+		currentPicks.push_back(p);
+		pop_heap(heap.begin(), heap.end());
+		heap.pop_back();
+		i++;
+	}
+
+	while (currentPicks.size() > 0) {
+		int id = rand() % currentPicks.size();
+		// cout << "picked id " << id << endl;
+		_Pair p = currentPicks.at(id);
+		currentPicks.erase(currentPicks.begin() + id);
+
+		// cout << "node id " << p.id << endl;
+
+		if (heap.size() > 0) {
+			cout << heap.size() << endl;
+			_Pair p2 = heap.front();
+			currentPicks.push_back(p2);
+			pop_heap(heap.begin(), heap.end());
+			heap.pop_back();
+		}
+
+		if (graph[p.id].reachable == true) continue;
+
+		graph[p.id].added = true;
+		nodesUsed++;
+
+		for (auto it = graph[p.id].adj.begin(); it != graph[p.id].adj.end(); ++it) {
+			int adjNode = *it;
+			graph[adjNode].reachable = true;
+		}
+
+	}
+
+	return nodesUsed;
 }
 
 int greedyHeapConstructive(Node graph[], int n) {
