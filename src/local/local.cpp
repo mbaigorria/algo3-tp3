@@ -1,5 +1,6 @@
 #include <iostream>
 #include <forward_list>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,6 +17,21 @@ struct Node {
 		added = false;
 		reachable = false;
 	}
+};
+
+struct _Pair {
+	int score;	
+	int id;
+
+	_Pair(int _score, int _id) {
+		score = _score;
+		id = _id;
+	}
+
+	bool operator <(const _Pair& x) {
+		return this->score < x.score;
+	}
+
 };
 
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
@@ -58,7 +74,7 @@ int main() {
 	int nodesUsedInSolution = greedyConstructive(graph, n);
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
 	
-	nodesUsedInSolution = localSearch2(graph, n, nodesUsedInSolution);
+	nodesUsedInSolution = localSearch(graph, n, nodesUsedInSolution);
 
 	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
 

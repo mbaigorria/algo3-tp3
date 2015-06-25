@@ -38,7 +38,7 @@ struct _Pair {
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
 int greedyHeapConstructiveRandomized(Node graph[], int n, int k);
 int localSearch(Node graph[], int n, int nodesUsedInSolution);
-int graspMIDS(Node graph[], int n, int j, int k);
+int graspMIDS(Node graph[], int n, int j, int k, bool localSolution[]);
 
 int main() {
 
@@ -46,7 +46,8 @@ int main() {
 	cin >> n >> m;
 
 	Node graph[n]; // graph container
-	
+	bool localSolution[n];
+
 	int u, v;
 	for (int i = 1; i <= m; ++i) { // (u,v) edges
 		cin >> u >> v;
@@ -54,11 +55,9 @@ int main() {
 		v--;
 		graph[u].adj.push_front(v);
 		graph[v].adj.push_front(u);
-
+		
 		graph[u].degree++;
 		graph[v].degree++;
-		graph[u].score++;
-		graph[v].score++;
 	}
 
 	int initialNodes = 0;
@@ -66,23 +65,21 @@ int main() {
 		if (graph[i].degree == 0) {
 			graph[i].added = true;
 			graph[i].reachable = true;
+			localSolution[i] = true;
 			initialNodes++;
 		}
 	}
 
-	int nodesUsedInSolution = graspMIDS(graph, n, 3, 3);
+	int nodesUsedInSolution = graspMIDS(graph, n, 3, 3, localSolution);
 
-	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
-
-	return 0;
-}
-
-void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
+	// display solution
 	cout << nodesUsedInSolution;
 	for (int i = 0; i < n; ++i) {
-		if (graph[i].added == true) cout << " " << i + 1;
+		if (localSolution[i] == true) cout << " " << i + 1;
 	}
 	cout << endl;
+
+	return 0;
 }
 
 /* GRASP Heuristic
@@ -90,14 +87,22 @@ void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
  * @param j Amount of attempts to improve solution.
  * @param k Parameter used for greedy heuristic.
  */
-int graspMIDS(Node graph[], int n, int j, int k) {
-	int nodesUsedInSolution;
+int graspMIDS(Node graph[], int n, int j, int k, bool localSolution[]) {
+	int currentBest = n + 1;
 	while (j > 0) {
-		nodesUsedInSolution = greedyHeapConstructiveRandomized(graph, n, k);
-		nodesUsedInSolution = localSearch(graph, n, nodesUsedInSolution);
+		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
+		nodesUsed = localSearch(graph, n, nodesUsed);
+
+		if (nodesUsed < currentBest) { // save local solution
+			for (int i = 0; i < n; ++i) {
+				localSolution[i] = graph[i].added;
+			}
+			currentBest = nodesUsed;
+		}
+
 		j--;
 	}
-	return nodesUsedInSolution;
+	return currentBest;
 }
 
 int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
@@ -111,8 +116,14 @@ int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
 	int nodesUsed = 0;
 
 	for (int i = 0; i < n; i++) {
-		if (graph[i].added == false)
-			heap.push_back(_Pair(graph[i].score, i));
+		if (graph[i].degree == 1) {
+			graph[i].added = true;
+			nodesUsed++;
+		} else {
+			graph[i].added = false;
+			graph[i].reachable = false;
+ 			heap.push_back(_Pair(graph[i].score, i));
+		}
 	}
 	make_heap(heap.begin(), heap.end());
 

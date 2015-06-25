@@ -98,8 +98,14 @@ int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
 	int nodesUsed = 0;
 
 	for (int i = 0; i < n; i++) {
-		if (graph[i].added == false)
-			heap.push_back(_Pair(graph[i].score, i));
+		if (graph[i].degree == 1) {
+			graph[i].added = true;
+			nodesUsed++;
+		} else {
+			graph[i].added = false;
+			graph[i].reachable = false;
+ 			heap.push_back(_Pair(graph[i].score, i));
+		}
 	}
 	make_heap(heap.begin(), heap.end());
 
