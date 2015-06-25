@@ -41,12 +41,13 @@ int main() {
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
 	
 	nodesUsedInSolution = localSearch(graph, n, nodesUsedInSolution);
+	// nodesUsedInSolution = localSearch2(graph, n, nodesUsedInSolution);
 
 	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
 
  	return 0;
 }
-
+z
 void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
 	cout << nodesUsedInSolution;
 	for (int i = 0; i < n; ++i) {

@@ -5,10 +5,14 @@
 GRASP (Greedy Randomized Adaptative Search Procedure) es una combinación entre una heuristica golosa aleatorizada y un procedimiento de búsqueda local. La metaheurística se puede ver con el siguiente pseudocódigo:
 
 \begin{algorithmic}
-\Procedure{grasp}{G}
-\While{$!terminationCondition()$}
+\Procedure{grasp}{G, k}
+\State{G bestSolution}
+\While{$!terminationCondition(G, k, bestSolution)$}
 	\State{s $\gets$ randomGreedyHeuristic(G)}
 	\State{s $\gets$ localSearch(G,s)}
+	\If{$|s| < |bestSolution|$}
+	\State{bestSolution $\gets$ s}
+	\EndIf
 \EndWhile
 \EndProcedure
 \end{algorithmic}
