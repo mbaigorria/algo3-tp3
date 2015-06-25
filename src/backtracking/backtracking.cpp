@@ -66,8 +66,8 @@ int main() {
 
 void backtracking(int current, int& n, int coveredNodes, int usedNodes, Node graph[], bool localSolution[], int& nodesUsedInSolution) {
 
-	if (graph[current].reachable == true) return backtracking(current + 1, n, coveredNodes, usedNodes, graph, localSolution, nodesUsedInSolution);
 	if (current == n) return; // no nodes left to add.
+	if (graph[current].reachable == true) return backtracking(current + 1, n, coveredNodes, usedNodes, graph, localSolution, nodesUsedInSolution);
 	if (usedNodes + 1 == nodesUsedInSolution) return; // cant beat current solution
 
 	int pushed = 0;
