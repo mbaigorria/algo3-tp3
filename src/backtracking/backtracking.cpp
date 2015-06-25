@@ -1,22 +1,8 @@
 #include <iostream>
 #include <forward_list>
+#include "../data_structures.h"
 
 using namespace std;
-
-struct Node {
-	unsigned int degree;
-	unsigned int score;
-	bool added;
-	bool reachable;
-	forward_list<int> adj;
-	
-	Node() {
-		degree = 0;
-		score = 0;
-		added = false;
-		reachable = false;
-	}
-};
 
 void backtracking(int current, int& n, int coveredNodes, int usedNodes, Node graph[], bool localSolution[], int& nodesUsedInSolution);
 
@@ -53,7 +39,7 @@ int main() {
 	int nodesUsedInSolution = n; // worst case scenario is n, that way I avoid setting all the array as true.
 
 	backtracking(0, n, initialNodes, initialNodes, graph, localSolution, nodesUsedInSolution);
-
+	
 	// display solution
 	cout << nodesUsedInSolution;
 	for (int i = 0; i < n; ++i) {

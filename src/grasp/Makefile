@@ -1,19 +1,22 @@
-# Compilador que será utilizado
+# compiler
 CC=g++
 
-# flags de compilación
+# compilation flags
 CFLAGS=-g -Wall -std=c++11
 
-# flags de linkeo
+# linker flags
 LDFLAGS=
 
-# Agregar acá los archivos .cpp a compilar
-SOURCES=grasp.cpp
+# -L comp flag
+INCDIR=../
 
-# Objetos que serán generados (no tocar)
+# .cpp files to compile
+SOURCES=../local/local.cpp ../greedy/greedy.cpp grasp.cpp
+
+# objects that will be generated from .cpp files
 OBJECTS=$(SOURCES:.cpp=.o)
 
-# Nombre del ejecutable a generar
+# executable name
 EXECUTABLE=grasp
 
 all: $(SOURCES) $(EXECUTABLE)
@@ -25,4 +28,4 @@ clean:
 	rm -rf $(EXECUTABLE) $(OBJECTS)
 
 .cpp.o:
-	$(CC) -I$(INCDIR) $(CFLAGS) $< -c -o $@
+	$(CC) -L$(INCDIR) $(CFLAGS) $< -c -o $@

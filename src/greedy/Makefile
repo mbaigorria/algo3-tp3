@@ -8,7 +8,7 @@ CFLAGS=-g -Wall -std=c++11
 LDFLAGS=
 
 # Agregar acá los archivos .cpp a compilar
-SOURCES=greedy.cpp
+SOURCES=greedy.cpp main.cpp
 
 # Objetos que serán generados (no tocar)
 OBJECTS=$(SOURCES:.cpp=.o)

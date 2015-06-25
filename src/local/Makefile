@@ -1,19 +1,21 @@
-# Compilador que será utilizado
+# compiler
 CC=g++
 
-# flags de compilación
+# compilation flags
 CFLAGS=-g -Wall -std=c++11
 
-# flags de linkeo
+# linker flags
 LDFLAGS=
 
-# Agregar acá los archivos .cpp a compilar
-SOURCES=local.cpp
+INCDIR=../greedy
 
-# Objetos que serán generados (no tocar)
+# .cpp files to compile
+SOURCES=local.cpp ../greedy/greedy.cpp main.cpp
+
+# objects that will be generated from .cpp files
 OBJECTS=$(SOURCES:.cpp=.o)
 
-# Nombre del ejecutable a generar
+# executable name
 EXECUTABLE=local
 
 all: $(SOURCES) $(EXECUTABLE)
