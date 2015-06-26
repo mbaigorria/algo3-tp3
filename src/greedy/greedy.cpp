@@ -26,13 +26,14 @@ int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
 	int nodesUsed = 0;
 
 	for (int i = 0; i < n; i++) {
-		if (graph[i].degree == 1) {
+		if (graph[i].degree == 0) {
 			graph[i].added = true;
+			graph[i].reachable = true;
 			nodesUsed++;
 		} else {
 			graph[i].added = false;
 			graph[i].reachable = false;
- 			heap.push_back(_Pair(graph[i].score, i));
+ 			heap.push_back(_Pair(graph[i].degree, i));
 		}
 	}
 	make_heap(heap.begin(), heap.end());
@@ -93,8 +94,9 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 	int nodesUsed = 0;
 
 	for (int i = 0; i < n; i++) {
-		if (graph[i].degree == 1) {
+		if (graph[i].degree == 0) {
 			graph[i].added = true;
+			graph[i].reachable = true;
 			nodesUsed++;
 		} else {
 			graph[i].added = false;
@@ -169,6 +171,8 @@ int greedyHeapConstructive(Node graph[], int n) {
 			nodesUsed++;
 		} else {
 			heap.push_back(_Pair(graph[i].score, i));
+			graph[i].added = false;
+			graph[i].reachable = false;
 		}
 	}
 	make_heap(heap.begin(), heap.end());
@@ -210,6 +214,10 @@ int greedyConstructive(Node graph[], int n) {
 			graph[i].added = true;
 			graph[i].reachable = true;
 			nodesUsed++;
+		} else {
+			graph[i].added = false;
+			graph[i].reachable = false;
+			graph[i].score = graph[i].degree;
 		}
 	}
 

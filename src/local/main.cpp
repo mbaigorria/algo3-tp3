@@ -22,8 +22,6 @@ int main() {
 
 		graph[u].degree++;
 		graph[v].degree++;
-		graph[u].score++;
-		graph[v].score++;
 	}
 
 	int nodesUsedInSolution = greedyConstructive(graph, n);
