@@ -65,11 +65,8 @@ int graspMIDSByIterations(Node graph[], int n, int j, int k, bool localSolution[
 	while (j > 0) {
 		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
 		//int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
-		// cout << "nodesUsed by randomized: "  << nodesUsed << endl;
 
-		nodesUsed = localSearch(graph, n, nodesUsed);
-		// nodesUsed = localSearch2(graph, n, nodesUsed);
-		// cout << "nodesUsedAfterLocal: " << nodesUsed << endl;
+		// nodesUsed = localSearch(graph, n, nodesUsed);
 
 		if (nodesUsed < currentBest) { // save local solution
 			for (int i = 0; i < n; ++i) {
@@ -96,6 +93,7 @@ int graspMIDSByValue(Node graph[], int n, int j, int k, bool localSolution[]) {
 	while (cycles < j) {
 		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
 		//int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
+		
 		nodesUsed = localSearch(graph, n, nodesUsed);
 		// nodesUsed = localSearch2(graph, n, nodesUsed);
 

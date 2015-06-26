@@ -62,6 +62,11 @@ int localSearch(Node graph[], int n, int nodesUsedInSolution) {
     return nodesUsedInSolution;
 }
 
+/* Local search by adding 2 nodes
+ * @param graph[] Array of nodes.
+ * @param n Size of graph.
+ * @param nodesUsedInSolution Size of current solution
+ */
 int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
 
     int currentNodes = nodesUsedInSolution;
@@ -140,6 +145,11 @@ int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
     return nodesUsedInSolution;
 }
 
+/* Checks if a node is reachable by other nodes in the set.
+ * @param graph[] Array of nodes.
+ * @param u Node id.
+ * @return Returns if u is reachable by the nodes in the set.
+ */
 bool isReachable(Node graph[], int u) {
 	for (auto it = graph[u].adj.begin(); it != graph[u].adj.end(); ++it) {
 		if (graph[*it].added) {
