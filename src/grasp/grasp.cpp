@@ -8,7 +8,8 @@
 using namespace std;
 
 void displaySolution(Node graph[], int n, int nodesUsedInSolution);
-int graspMIDS(Node graph[], int n, int j, int k, bool localSolution[]);
+int graspMIDSByIterations(Node graph[], int n, int j, int k, bool localSolution[]);
+int graspMIDSByValue(Node graph[], int n, int j, int k, bool localSolution[]);
 
 int main() {
 
@@ -40,7 +41,8 @@ int main() {
 		}
 	}
 
-	int nodesUsedInSolution = graspMIDS(graph, n, 3, 3, localSolution);
+	int nodesUsedInSolution = graspMIDSByIterations(graph, n, 3, 3, localSolution);
+	// int nodesUsedInSolution = graspMIDSByValue(graph, n, 3, 3, localSolution);
 
 	// display solution
 	cout << nodesUsedInSolution;
@@ -63,15 +65,18 @@ void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
 
 /* GRASP Heuristic
  * Minimum Independent Dominating Set
+ * Stop criteria: Iterations
  * @param j Amount of attempts to improve solution.
  * @param k Parameter used for greedy heuristic.
  * @return Nodes used in solution set.
  */
-int graspMIDS(Node graph[], int n, int j, int k, bool localSolution[]) {
+int graspMIDSByIterations(Node graph[], int n, int j, int k, bool localSolution[]) {
 	int currentBest = n + 1;
 	while (j > 0) {
 		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
+		//int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
 		nodesUsed = localSearch(graph, n, nodesUsed);
+		// nodesUsed = localSearch2(graph, n, nodesUsed);
 
 		if (nodesUsed < currentBest) { // save local solution
 			for (int i = 0; i < n; ++i) {
@@ -81,6 +86,35 @@ int graspMIDS(Node graph[], int n, int j, int k, bool localSolution[]) {
 		}
 
 		j--;
+	}
+	return currentBest;
+}
+
+/* GRASP Heuristic
+ * Minimum Independent Dominating Set
+ * Stop criteria: Cycles without improvements
+ * @param j Limit to cycles without improvements.
+ * @param k Parameter used for greedy heuristic.
+ * @return Nodes used in solution set.
+ */
+int graspMIDSByValue(Node graph[], int n, int j, int k, bool localSolution[]) {
+	int currentBest = n + 1;
+	int cycles = 0;
+	while (cycles < j) {
+		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
+		//int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
+		nodesUsed = localSearch(graph, n, nodesUsed);
+		// nodesUsed = localSearch2(graph, n, nodesUsed);
+
+		if (nodesUsed < currentBest) { // save local solution
+			for (int i = 0; i < n; ++i) {
+				localSolution[i] = graph[i].added;
+			}
+			currentBest = nodesUsed;
+			cycles = 0;
+		} else {
+			cycles++;
+		}
 	}
 	return currentBest;
 }

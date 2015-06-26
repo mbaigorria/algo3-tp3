@@ -1,7 +1,7 @@
 #ifndef GREEDY_H_
 #define GREEDY_H_
 
-#include "../data_structures.h"
+#include "../containers.h"
 
 using namespace std;
 

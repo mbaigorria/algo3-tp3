@@ -8,7 +8,7 @@ GRASP (Greedy Randomized Adaptative Search Procedure) es una combinación entre 
 \Procedure{grasp}{G, k}
 \State{G bestSolution}
 \While{$!terminationCondition(G, k, bestSolution)$}
-	\State{s $\gets$ randomGreedyHeuristic(G)}
+	\State{s $\gets$ randomGreedyHeuristic(G, k)}
 	\State{s $\gets$ localSearch(G,s)}
 	\If{$|s| < |bestSolution|$}
 	\State{bestSolution $\gets$ s}
@@ -22,15 +22,13 @@ De este procedimiento surgen dos preguntas, que en realidad son cosas que debemo
 \subsubsection{Random Greedy Heuristic}
 
 \begin{enumerate}
-\item Por cantidad:
+\item \underline{Por cantidad}:
 Para agregarle una componente aleatoria a \texttt{GRASP}, se propone fabricar en cada paso de la heurística constructiva golosa una \textit{Lista Restricta de Candidatos} (RCL) y elegir aleatoriamente un candidato de esta lista. Para ello, decidimos crear la función \texttt{greedyHeapConstructiveRandomized(Node graph[], int n, int k)} que lo que hace es ir eligiendo los $k$ vértices con mayor grado utilizando un heap como estructura auxiliar.
-\item Por valor: \textbf{TODO (programarlo también, es un toque)}
+\item \underline{Por valor:} Al igual que en el criterio anterior, elegimos un candidato aleatorio de una lista desde un heap. Sin embargo, ahora un vértice esta en la lista de candidatos si y solo si el grado de cualquier nodo en la lista esta a una distancia de $k$ grados del vértice de mayor grado.
 \end{enumerate}
 
-\subsubsection{Criterio de terminación}
+\subsubsection{Criterios de terminación}
 \begin{enumerate}
 \item No se encontró ninguna mejora en las ultimas $j$ iteraciones.
 \item Se alcanzo un limite prefijado de  $j$ iteraciones.
 \end{enumerate}
-
-\textbf{2x2x2, tenes 4 experimentaciones posibles combinando esto, x2 con las dos localidades definidas (hay que testear, mejorar y corregir eso)}

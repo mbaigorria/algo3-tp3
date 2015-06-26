@@ -1,7 +1,7 @@
 #ifndef LOCAL_H_
 #define LOCAL_H_
 
-#include "../data_structures.h"
+#include "../containers.h"
 #include "../greedy/greedy.h"
 
 using namespace std;

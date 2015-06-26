@@ -1,5 +1,5 @@
-#ifndef DATA_STRUCTURES_H
-#define DATA_STRUCTURES_H
+#ifndef DATA_STRUCTURES_H_
+#define DATA_STRUCTURES_H_
 
 #include <forward_list>
 
