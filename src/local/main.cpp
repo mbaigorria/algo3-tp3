@@ -26,22 +26,13 @@ int main() {
 		graph[v].score++;
 	}
 
-	int initialNodes = 0;
-	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
-		if (graph[i].degree == 0) {
-			graph[i].added = true;
-			graph[i].reachable = true;
-			initialNodes++;
-		}
-	}
-
 	int nodesUsedInSolution = greedyConstructive(graph, n);
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
-	
+
 	nodesUsedInSolution = localSearch(graph, n, nodesUsedInSolution);
 	// nodesUsedInSolution = localSearch2(graph, n, nodesUsedInSolution);
 
-	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
+	displaySolution(graph, n, nodesUsedInSolution);
 
  	return 0;
 }

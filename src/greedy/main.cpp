@@ -26,20 +26,11 @@ int main() {
 		graph[v].score++;
 	}
 
-	int initialNodes = 0;
-	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
-		if (graph[i].degree == 0) {
-			graph[i].added = true;
-			graph[i].reachable = true;
-			initialNodes++;
-		}
-	}
-
 	// int nodesUsedInSolution = greedyConstructive(graph, n);
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
 	int nodesUsedInSolution = greedyHeapConstructiveRandomized(graph, n, 3);
 
-	displaySolution(graph, n, nodesUsedInSolution + initialNodes);
+	displaySolution(graph, n, nodesUsedInSolution);
 
 	return 0;
 }

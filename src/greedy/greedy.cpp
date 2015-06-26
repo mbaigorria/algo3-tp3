@@ -48,14 +48,10 @@ int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
 
 	while (currentPicks.size() > 0) {
 		int id = rand() % currentPicks.size();
-		// cout << "picked id " << id << endl;
 		_Pair p = currentPicks.at(id);
 		currentPicks.erase(currentPicks.begin() + id);
 
-		// cout << "node id " << p.id << endl;
-
 		if (heap.size() > 0) {
-			// cout << heap.size() << endl;
 			_Pair p2 = heap.front();
 			currentPicks.push_back(p2);
 			pop_heap(heap.begin(), heap.end());
@@ -103,14 +99,14 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 		} else {
 			graph[i].added = false;
 			graph[i].reachable = false;
- 			heap.push_back(_Pair(graph[i].score, i));
+ 			heap.push_back(_Pair(graph[i].degree, i));
 		}
 	}
 	make_heap(heap.begin(), heap.end());
 
 	int i = 0;
-	int degree = heap.front().score;
-	while(heap.front().score > degree - k && i < (int) heap.size()) {
+	int degree = heap.front().degree;
+	while(heap.front().degree > degree - k && i < (int) heap.size()) {
 		_Pair p = heap.front();
 		currentPicks.push_back(p);
 		pop_heap(heap.begin(), heap.end());
@@ -120,16 +116,12 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 
 	while (currentPicks.size() > 0) {
 		int id = rand() % currentPicks.size();
-		// cout << "picked id " << id << endl;
 		_Pair p = currentPicks.at(id);
 		currentPicks.erase(currentPicks.begin() + id);
 
-		degree = currentPicks.at(0).score; // update degree
+		degree = currentPicks.at(0).degree; // update degree
 
-		// cout << "node id " << p.id << endl;
-
-		if (heap.size() > 0 && heap.front().score > degree - k) {
-			// cout << heap.size() << endl;
+		if (heap.size() > 0 && heap.front().degree > degree - k) {
 			_Pair p2 = heap.front();
 			currentPicks.push_back(p2);
 			pop_heap(heap.begin(), heap.end());
@@ -159,14 +151,20 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
  * @param n Size of graph.
  * @return Nodes used in solution set.
  */
+
 int greedyHeapConstructive(Node graph[], int n) {
 
 	vector<_Pair> heap;
 	int nodesUsed = 0;
 
 	for (int i = 0; i < n; i++) {
-		if (graph[i].added == false)
+		if (graph[i].degree == 0) {
+			graph[i].added = true;
+			graph[i].reachable = true;
+			nodesUsed++;
+		} else {
 			heap.push_back(_Pair(graph[i].score, i));
+		}
 	}
 	make_heap(heap.begin(), heap.end());
 
@@ -200,7 +198,15 @@ int greedyHeapConstructive(Node graph[], int n) {
  */
 int greedyConstructive(Node graph[], int n) {
 
-	int nodesUsedInSolution = 0;
+	int nodesUsed = 0;
+
+	for (int i = 0; i < n; i++) {
+		if (graph[i].degree == 0) {
+			graph[i].added = true;
+			graph[i].reachable = true;
+			nodesUsed++;
+		}
+	}
 
 	for (int i = 0; i < n; ++i) {
 
@@ -232,8 +238,8 @@ int greedyConstructive(Node graph[], int n) {
 			}
 		}
 
-		nodesUsedInSolution++;
+		nodesUsed++;
 	}
 
-	return nodesUsedInSolution;
+	return nodesUsed;
 }

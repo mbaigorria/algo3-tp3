@@ -21,16 +21,16 @@ struct Node {
 };
 
 struct _Pair {
-	int score;	
+	int degree;	
 	int id;
 
-	_Pair(int _score, int _id) {
-		score = _score;
+	_Pair(int _degree, int _id) {
+		degree = _degree;
 		id = _id;
 	}
 
 	bool operator <(const _Pair& x) {
-		return this->score < x.score;
+		return this->degree < x.degree;
 	}
 };
 
