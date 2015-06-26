@@ -28,7 +28,8 @@ int main() {
 
 	// int nodesUsedInSolution = greedyConstructive(graph, n);
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
-	int nodesUsedInSolution = greedyHeapConstructiveRandomized(graph, n, 3);
+	// int nodesUsedInSolution = greedyHeapConstructiveRandomized(graph, n, 3);
+	int nodesUsedInSolution = greedyHeapConstructiveRandomized2(graph, n, 3);
 
 	displaySolution(graph, n, nodesUsedInSolution);
 

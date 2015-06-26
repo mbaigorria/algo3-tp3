@@ -86,7 +86,7 @@ int greedyHeapConstructiveRandomized(Node graph[], int n, int k) {
  */
 int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 
-	if (k == 0) return E_INVALID_PARAMETER;
+	if (k < 0) return E_INVALID_PARAMETER;
 
 	vector<_Pair> currentPicks;
 	vector<_Pair> heap;
@@ -106,7 +106,7 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 
 	int i = 0;
 	int degree = heap.front().degree;
-	while(heap.front().degree > degree - k && i < (int) heap.size()) {
+	while(i < (int) heap.size() && heap.front().degree >= degree - k) {
 		_Pair p = heap.front();
 		currentPicks.push_back(p);
 		pop_heap(heap.begin(), heap.end());
@@ -116,12 +116,18 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 
 	while (currentPicks.size() > 0) {
 		int id = rand() % currentPicks.size();
+
 		_Pair p = currentPicks.at(id);
+
 		currentPicks.erase(currentPicks.begin() + id);
 
-		degree = currentPicks.at(0).degree; // update degree
+		if (currentPicks.size() > 0) {
+			degree = currentPicks.at(0).degree;
+		} else {
+			degree = 0;
+		}
 
-		if (heap.size() > 0 && heap.front().degree > degree - k) {
+		if (heap.size() > 0 && heap.front().degree >= degree - k) {
 			_Pair p2 = heap.front();
 			currentPicks.push_back(p2);
 			pop_heap(heap.begin(), heap.end());
@@ -139,7 +145,6 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
 		}
 
 	}
-
 	return nodesUsed;
 }
 
