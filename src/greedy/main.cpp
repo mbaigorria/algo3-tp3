@@ -1,7 +1,4 @@
 #include <iostream>
-#include <forward_list>
-#include <algorithm>
-#include <stdlib.h>
 #include "greedy.h"
 
 using namespace std;

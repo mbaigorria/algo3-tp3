@@ -65,6 +65,7 @@ void displaySolution(Node graph[], int n, int nodesUsedInSolution) {
  * Minimum Independent Dominating Set
  * @param j Amount of attempts to improve solution.
  * @param k Parameter used for greedy heuristic.
+ * @return Nodes used in solution set.
  */
 int graspMIDS(Node graph[], int n, int j, int k, bool localSolution[]) {
 	int currentBest = n + 1;

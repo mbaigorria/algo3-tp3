@@ -6,7 +6,6 @@
 
 using namespace std;
 
-// void displaySolution(Node graph[], int n, int nodesUsedInSolution);
 int localSearch(Node graph[], int n, int nodesUsedInSolution);
 int localSearch2(Node graph[], int n, int nodesUsedInSolution);
 bool belongsTo(forward_list<int> adj, int x);
