@@ -28,7 +28,7 @@ int localSearch(Node graph[], int n, int nodesUsedInSolution) {
 
 		for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) { // iterate adj
 
-			if (graph[*it].added == false) continue; // doesnt affect adj nodes.
+			if (graph[*it].added == false || *it == i) continue; // doesnt affect adj nodes.
 
 			removed.push_front(*it);
 			graph[*it].added = false; 
@@ -78,8 +78,6 @@ int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
 
 	        if (j == n) break; // no pair found
 
-	        cout << "i: " << i << "j: " << j << endl;
-
 	        graph[i].added = true;
 	        graph[j].added = true;
 	        currentNodes = currentNodes + 2;
@@ -89,7 +87,7 @@ int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
 	        // analyze node i
 			for (auto it = graph[i].adj.begin(); it != graph[i].adj.end(); ++it) { // iterate adj
 
-				if (graph[*it].added == false) continue; // doesnt affect adj nodes.
+				if (graph[*it].added == false || *it == i || *it == j) continue; // doesnt affect adj nodes.
 
 				removed.push_front(*it);
 				graph[*it].added = false; 
@@ -107,10 +105,10 @@ int localSearch2(Node graph[], int n, int nodesUsedInSolution) {
 			// analyze node j
 			for (auto it = graph[j].adj.begin(); it != graph[j].adj.end(); ++it) { // iterate adj
 
-				if (graph[*it].added == false) continue; // doesnt affect adj nodes.
+				if (graph[*it].added == false || *it == i || *it == j) continue; // doesnt affect adj nodes.
 
 				removed.push_front(*it);
-				graph[*it].added = false; 
+				graph[*it].added = false;
 				currentNodes--;
 
 				for (auto it2 = graph[*it].adj.begin(); it2 != graph[*it].adj.end(); ++it2) { // iterate adj to adj
