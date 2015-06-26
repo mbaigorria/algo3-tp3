@@ -28,7 +28,7 @@ int main() {
 
 	int nodesUsedInSolution = greedyConstructive(graph, n);
 	// int nodesUsedInSolution = greedyHeapConstructive(graph, n);
-
+	
 	nodesUsedInSolution = localSearch(graph, n, nodesUsedInSolution);
 	// nodesUsedInSolution = localSearch2(graph, n, nodesUsedInSolution);
 

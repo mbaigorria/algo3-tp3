@@ -8,6 +8,5 @@ using namespace std;
 
 int localSearch(Node graph[], int n, int nodesUsedInSolution);
 int localSearch2(Node graph[], int n, int nodesUsedInSolution);
-bool belongsTo(forward_list<int> adj, int x);
 
 #endif
