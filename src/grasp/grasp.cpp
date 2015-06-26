@@ -31,16 +31,6 @@ int main() {
 		graph[v].degree++;
 	}
 
-	int initialNodes = 0;
-	for (int i = 0; i < n; ++i) { // add d(v)=0 nodes to cover.
-		if (graph[i].degree == 0) {
-			graph[i].added = true;
-			graph[i].reachable = true;
-			localSolution[i] = true;
-			initialNodes++;
-		}
-	}
-
 	int nodesUsedInSolution = graspMIDSByIterations(graph, n, 3, 3, localSolution);
 	// int nodesUsedInSolution = graspMIDSByValue(graph, n, 3, 3, localSolution);
 
