@@ -42,12 +42,10 @@ Para este criterio, lo que hacemos es buscar dos nodos que no pertenecen a la so
 
 \subsubsection{Primera vecindad}
 
-En una iteración, el primer algoritmo de vecindad agrega un nodo y luego quita sus adyacentes. Por lo tanto, en el peor caso una iteración tiene orden \order{n \times \Delta(G)^2}. Esto se debe a que se debe verificar que todos los nodos adyacentes a los que saque son adyacentes a algún otro nodo del conjunto en \order{\Delta(G)} para cada nodo adyacente ($\Delta(G)$). \footnote{$\Delta(G)$ denota el máximo grado de un vértice perteneciente al grafo.}
+En una iteración, el primer algoritmo de vecindad agrega un nodo y luego quita sus adyacentes. Luego verifica que los adyacentes de estos vértices que hemos quitado son alcanzables. Por lo tanto, en el peor caso una iteración tiene orden \order{n \times \Delta(G)^3}. Esto se debe a que se debe verificar que todos los nodos adyacentes a los que saque son adyacentes a algún otro nodo del conjunto en \order{\Delta(G)} para cada nodo adyacente ($\Delta(G)$) a los adyacentes que pude quitar ($\Delta(G)$). \footnote{$\Delta(G)$ denota el máximo grado de un vértice perteneciente al grafo.}. Si el nuevo conjunto de nodos no es un CIDM, simplemente restauramos el grafo en \order{\Delta(G)}.
 
 \subsubsection{Segunda vecindad}
 
-En el segundo caso, probamos agregando todos los pares de nodos a la solución actual, quitando sus nodos adyacentes y verificando si luego es una solución. Para ello, repetimos el procedimiento de la primera vecindad, aunque con una particularidad adicional: debemos verificar que al ver los adyacentes de los adyacentes, los mismos no correspondan a los vértices que quite al agregar el otro vértice.
+En el segundo caso, probamos agregando todos los pares de nodos a la solución actual, quitando sus nodos adyacentes y verificando si luego es una solución. Para ello, simplemente repetimos el procedimiento de la primera vecindad.
 
-Entonces, al agregar un vértice, quito todos sus vértices adyacentes (para mantener la independencia). Luego verifico que los adyacentes de los adyacentes son alcanzables. Esto ahora se hace $\Delta(G)$ veces en \order{\Delta(G)^2}. Esto se debe a que al verificar sus nodos adyacentes, debo ver que no estén en la lista de vértices adyacentes del otro nodo que también agregue.
-
-Este procedimiento lo repetimos para todo par de $v \not\in S$. Podemos acotar esto de forma grotesca por $\binom{n}{2}$. Por lo tanto la complejidad total de una iteración es de \order{\binom{n}{2} \times \Delta(G)^3}. Esto se podría mejorar optimizando la búsqueda en la lista de adyacencia de un vértice a \order{\binom{n}{2} \times \Delta(G)^2 \times log(\Delta(G))}.
+Este procedimiento lo repetimos para todo par de $v \not\in S$. Podemos acotar esto de forma grotesca por $\binom{n}{2}$. Por lo tanto la complejidad total de una iteración es de \order{\binom{n}{2} \times \Delta(G)^3}.
