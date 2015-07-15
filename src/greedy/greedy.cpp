@@ -158,7 +158,6 @@ int greedyHeapConstructiveRandomized2(Node graph[], int n, int k) {
  * @param n Size of graph.
  * @return Nodes used in solution set.
  */
-
 int greedyHeapConstructive(Node graph[], int n) {
 
 	vector<_Pair> heap;

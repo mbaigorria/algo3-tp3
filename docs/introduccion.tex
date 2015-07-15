@@ -2,7 +2,7 @@
 
 \subsection{Definiciones}
 
-Antes de enunciar el problema a resolver en este trabajo practico, es necesario definir algunos conceptos.
+Antes de enunciar el problema a resolver en este trabajo práctico, es necesario definir algunos conceptos.
 
 Sea $G = (V,E)$ un grafo simple:
 \begin{definition}
@@ -10,11 +10,11 @@ Un conjunto $I \subseteq V$ es un \textit{conjunto independiente} de $G$ si no e
 \end{definition}
 
 \begin{definition}
-Un conjunto $D \subseteq V$ es un \textit{conjunto dominante} de G si todo vértice de $G$ esta en $D$ o bien tiene al menos un vecino que esta en $D$.
+Un conjunto $D \subseteq V$ es un \textit{conjunto dominante} de G si todo vértice de $G$ esta en $D$ o bien tiene al menos un vecino que está en $D$.
 \end{definition}
 
 \begin{definition}
-Un conjunto \textit{conjunto independiente dominante} de $G$ es un conjunto independiente que a su vez es dominante del grafo G. Desde un conjunto independiente dominante se puede acceder a cualquier vértice del grafo $G$ con solo recorrer una arista desde uno de sus vértices.
+Un conjunto \textit{conjunto independiente dominante} de $G$ es un conjunto independiente que a su vez es dominante del grafo G. Desde un conjunto independiente dominante se puede acceder a cualquier vértice del grafo $G$. Esto se debe a que el vértice pertenece al conjunto o se puede acceder con sólo recorrer una arista desde uno de sus vértices.
 \end{definition}
 
 \begin{definition}
@@ -25,7 +25,30 @@ Un \textit{Conjunto Independiente Dominante Mínimo} (CIDM) es el conjunto indep
 En 1979, Garey y Johnson probaron que el problema de encontrar el CIDM de un grafo es un problema NP-Hard\footnote{M.R. Garey, D.S. Johnson, Computers and Intractability: A Guide to the Theory of NP-Completeness, Freeman and Company, San Francisco (1979).}.
 El objetivo del trabajo es utilizar diferentes técnicas algorítmicas para resolver este problema. En un principio diseñaremos e implementaremos un algoritmo exacto para el mismo. Dada la complejidad del problema, luego propondremos diferentes algoritmos heurísticos para llegar a una solución que sea lo suficientemente buena a fines prácticos en un tiempo razonable.
 
-Si recordamos el problema 3 del TP1, podemos ver claramente que el mismo es un caso particular del problema del conjunto dominante mínimo. En este problema se imponía cierta estructura sobre el grafo en el que se efectuaba la búsqueda. El grafo en si no era completo, dado que cada casilla era representada por un nodo, y un caballo no podía acceder a los nodos adyacentes. El movimiento de los caballos se modelaba con aristas entre nodos. Este no es un caso del CIDM dado que la solución optima al problema (la menor cantidad de caballos para cubrir el tablero) no necesariamente era independiente. Por lo tanto, al buscar la solución estaríamos buscando el CDM del grafo.
+\subsubsection{El señor de los caballos}
+Si recordamos el problema 3 del TP1, podemos ver claramente que el mismo es un caso particular del problema del conjunto dominante mínimo. El problema consistía en cubrir un tablero de ajedrez con la menor cantidad de caballos posible dados ciertos casilleros que ya estaban cubiertos por caballos de forma tal que todo casillero este ocupado por un caballo o pueda ser accedido por un caballo en otro casillero.
+
+\subsubsection*{Modelado}
+El problema fue modelado con un grafo, donde cada casilla era representada por un vertice y el movimiento de los caballos se modelaba con aristas entre nodos. Esto se puede ver en la siguiente figura:
+
+\begin{center}
+\chessboard[printarea={a1-e5},
+			setwhite={Nc3},
+			pgfstyle=cross,
+			color = red,
+			markfield={b1,d1,a2,e2,a4,e4,b5,d5},
+			showmover=false]
+\end{center}
+
+En este caso, el caballo ubicado en el centro de la figura solo tiene 8 movimientos validos que aparecen marcados en la figura con una cruz roja. Al modelar este problema con grafos, cada casilla es adyacente a las casillas que podrían ser accedidas con un movimiento de caballo si hubiese un caballo en esa posición.
+
+\subsubsection*{Dominancia}
+
+Consideraremos que una casilla esta en el conjunto solución si contiene un caballo. El problema pide que el conjunto final de caballos (o casillas, vértices) sea dominante. Esto se debe a que toda casilla en el tablero debe estar en el conjunto o debe poder ser accedida desde una casilla 'adyacente'.
+
+\subsubsection*{Independencia}
+
+Este no es un caso del CIDM dado que la solución óptima al problema (la menor cantidad de caballos para cubrir el tablero) no necesariamente era independiente. Por ejemplo, los caballos dados al principio del problema no necesariamente son independientes. Por lo tanto, al buscar la solución estaríamos buscando el CDM del grafo.
 
 \subsection{Maximalidad y dominancia}
 
@@ -36,7 +59,7 @@ Sea M un conjunto independiente maximal de G. $\forall v \in G.V$, si $v \notin 
 \end{proposition}
 
 \begin{proof}
-Por absurdo. Sea M un conjunto independiente maximal y $v \notin G.V$. $\not\exists u \in M$ tal que $u$ es adyacente a $v$. Por lo tanto, puedo agregar $v$ a $M$ y el conjunto va a seguir siendo independiente. Esto es absurdo, dado que el conjunto era maximal.
+Por absurdo. Sea M un conjunto independiente maximal y $v$ un vértice tal que $v \in G.V \land v \notin M$. $\not\exists u \in M$ tal que $u$ es adyacente a $v$. Por lo tanto, puedo agregar $v$ a $M$ y el conjunto va a seguir siendo independiente. Esto es absurdo, dado que el conjunto era maximal.
 \end{proof}
 
 \begin{proposition}
@@ -44,14 +67,20 @@ Dado $G(V,E)$, todo conjunto independiente maximal es un conjunto independiente 
 \end{proposition}
 
 \begin{proof}
-Sea $M$ un conjunto independiente maximal. Dado $v \in G.V$, por la propiedad anterior, si $v \notin M \implies \exists u \in M$ tal que $u$ es adyacente a $v$. Por lo tanto, si $v \notin M$ entonces $v$ tiene algún vecino que esta en $M$. Esto significa que $M$ es dominante.
+Sea $M$ un conjunto independiente maximal. Dado $v \in G.V$, por la propiedad anterior, si $v \notin M \implies \exists u \in M$ tal que $u$ es adyacente a $v$. Por lo tanto, si $v \notin M$ entonces $v$ tiene algún vecino que está en $M$. Esto significa que $M$ es dominante.
 \end{proof}
-
-\newpage
 
 \subsection{Modelado}
 Muchos problemas se pueden modelar con grafos y se pueden resolver mediante la búsqueda del conjunto independiente dominante mínimo.
 
 \subsubsection{Planificador Urbano}
 
-Supongamos que un planificador urbano esta diseñando una ciudad con muchos barrios. Con el objetivo de proveer un buen sistema de salud para los habitantes, el planificador determina que cada barrio debe tener que cruzar a lo sumo un barrio para acceder a un hospital publico. Aquí podemos modelar a cada barrio con un vértice, y representar la adyacencia entre barrios con una arista. Al obtener el CIDM, obtenemos la ubicación y la mínima cantidad de hospitales públicos necesarios para cumplir con los objetivos del planificador.
+Supongamos que un planificador urbano esta diseñando una ciudad con muchos barrios. Con el objetivo de proveer un buen sistema de salud para los habitantes, el planificador determina que cada habitante debe tener que cruzar a lo sumo un barrio para acceder a un hospital público, que cada barrio puede tener a lo sumo un hospital público y que no es eficiente en terminos de costos que existan dos hospitales en dos barrios adyacentes. Aquí podemos modelar a cada barrio con un vértice, y representar la adyacencia entre barrios con una arista. Al obtener el CIDM, obtenemos la ubicación y la mínima cantidad de hospitales públicos necesarios para cumplir con los objetivos del planificador.
+
+\subsubsection{Policia}
+
+La Policía Federal y la Policía Metropolitana finalmente deciden trabajar en conjunto para mejorar la seguridad en la Ciudad de Buenos Aires. Con el objetivo de mejorar el tiempo de respuesta ante hechos de inseguridad graves, se decide reasignar un conjunto de efectivos policiales para resguardar las zonas con altos indices de inseguridad. Estos efectivos se deben distribuir de forma tal que ningún efectivo tenga que cruzar mas de una zona para atender una situación delictiva.
+
+Debido a que los efectivos se ponen a charlar y se distraen cuando están en dos zonas adyacentes, los jefes policiales deciden que dos efectivos no pueden estar ubicados en zonas adyacentes. A su vez, los jefes policiales buscan utilizar la menor cantidad de recursos posibles.
+
+Por lo tanto, este problema se puede resolver modelándolo con grafos y buscando el CIDM. Cada zona puede ser representada por un vértice, y la adyacencia entre zonas por aristas. Estamos buscando un conjunto dominante dado que se deben resguardar todas estas zonas (suponemos que tenemos la cantidad de efectivos suficiente). Ademas, este conjunto sera independiente dado que si no los efectivos se ponen a charlar y no trabajan.
