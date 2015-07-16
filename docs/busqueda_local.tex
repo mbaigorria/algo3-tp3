@@ -42,7 +42,7 @@ Para este criterio, lo que hacemos es buscar dos nodos que no pertenecen a la so
 
 \subsubsection{Primera vecindad}
 
-En una iteración, el primer algoritmo de vecindad agrega un nodo y luego quita sus adyacentes. Luego verifica que los adyacentes de estos vértices que hemos quitado son alcanzables. Por lo tanto, en el peor caso una iteración tiene orden \order{n \times \Delta(G)^3}. Esto se debe a que se debe verificar que todos los nodos adyacentes a los que saque son adyacentes a algún otro nodo del conjunto en \order{\Delta(G)} para cada nodo adyacente ($\Delta(G)$) a los adyacentes que pude quitar ($\Delta(G)$). \footnote{$\Delta(G)$ denota el máximo grado de un vértice perteneciente al grafo.}. Si el nuevo conjunto de nodos no es un CIDM, simplemente restauramos el grafo en \order{\Delta(G)}.
+En una iteración, el primer algoritmo de vecindad agrega un nodo y luego quita sus adyacentes. Luego verifica que los adyacentes de estos vértices que hemos quitado son alcanzables. Por lo tanto, en el peor caso una iteración tiene orden \order{n \times \Delta(G)^3}. Esto se debe a que se debe verificar que todos los nodos adyacentes a los que saque son adyacentes a algún otro nodo del conjunto en \order{\Delta(G)} para cada nodo adyacente ($\Delta(G)$) a los adyacentes que pude quitar ($\Delta(G)$). Si el nuevo conjunto de nodos no es un CIDM, simplemente restauramos el grafo en \order{\Delta(G)}.
 
 \subsubsection{Segunda vecindad}
 

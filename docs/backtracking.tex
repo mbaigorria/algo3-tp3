@@ -11,28 +11,71 @@ Representamos al grafo con un arreglo $graph[n]$ de nodos. Cada nodo tiene los s
 	\item reachable: Bool que indica si el nodo actual puede ser alcanzado desde un nodo perteneciente al cubrimiento.
 \end{enumerate}
 
-Comenzamos definiendo la función $backtracking$, que lo que hace es tomar un nodo del grafo, y luego considera los casos en los que el nodo pertenece o no a un posible cubrimiento. En caso de agregar el nodo al cubrimiento, todos los nodos adyacentes al mismo son ignorados en futuras llamadas recursivas. Si consideráramos los nodos adyacentes, romperíamos la independencia de los  cubrimientos y ademas no solo incrementaría la complejidad del código sino que también el tiempo de ejecución del mismo.
+Comenzamos definiendo la función $backtracking$, que lo que hace es tomar un nodo del grafo, y luego considera los casos en los que el nodo pertenece o no a un posible cubrimiento. En caso de agregar el nodo al cubrimiento, todos los nodos adyacentes al mismo son ignorados en futuras llamadas recursivas. Si consideráramos los nodos adyacentes, romperíamos la independencia de los  cubrimientos y además no solo incrementaría la complejidad del código sino que también el tiempo de ejecución del mismo.
 
 \subsection{Podas y estrategias}
 
-Para poder resolver el problema lo mas rápido posible, en primer lugar buscamos una forma rápida de verificar si un conjunto solución encontrado es independiente. En vez de tener que verificarlo, decidimos forzar la independencia por construcción. Esto se logro evitando los nodos adyacentes a los que ya agrego el algoritmo al potencial conjunto solución. De esta forma mantenemos la independencia del conjunto y evitamos tener que agregar innecesariamente muchos nodos. 
+Para poder resolver el problema lo mas rápido posible, en primer lugar buscamos una forma rápida de verificar si un conjunto solución encontrado es independiente. En vez de tener que verificarlo, decidimos forzar la independencia por construcción. Esto se logró evitando los nodos adyacentes a los que ya agregó el algoritmo al potencial conjunto solución. De esta forma mantenemos la independencia del conjunto y evitamos tener que agregar innecesariamente muchos nodos. 
 
-Otro problema importante es verificar si los nodos seleccionados forman un cubrimiento. Esto lo resolvimos simplemente haciendo que la función backtracking lleve la cuenta del total de nodos alcanzables por el cubrimiento. Si ese numero es igual al numero total de nodos, significa que llegamos a un cubrimiento. De esta manera evitamos funciones auxiliares que tengan que verificar si los nodos seleccionados hasta ahora forman un cubrimiento, y a su vez sabemos que por construcción el mismo es independiente.
+Otro problema importante es verificar si los nodos seleccionados forman un cubrimiento. Esto lo resolvimos simplemente haciendo que la función backtracking lleve un contador con el total de nodos alcanzables por el cubrimiento. Este contador lo incrementamos cada vez que agregamos un nodo, considerando todos sus adyacentes que aún no hemos clasificado como alcanzables. Si ese número es igual al número total de nodos, significa que llegamos a un cubrimiento. De esta manera evitamos funciones auxiliares que tengan que verificar si los nodos seleccionados hasta ahora forman un cubrimiento, y a su vez sabemos que por construcción el mismo es independiente.
 
-Ademas, antes de comenzar la búsqueda agregamos todos los vértices de $d(v) = 0$ al conjunto solución final. Esto se debe a que estos vértices necesariamente estarán en la solución. Es muy simple probar esto, dado que si no lo estuvieran, algún vértice adyacente debería estar en el conjunto para que lo cubra. Sin embargo, tal vértice no existe.
+Además, antes de comenzar la búsqueda agregamos todos los vértices de $d(v) = 0$ al conjunto solución final. Esto se debe a que estos vértices necesariamente estarán en la solución. Es muy simple probar esto, dado que si no lo estuvieran, algún vértice adyacente debería estar en el conjunto para que lo cubra. Sin embargo, tal vértice no existe. El costo de hacer esto es \order{n}, dado que solo tenemos que recorrer un arreglo de nodos una vez, verificando su atributo de grado.
 
-Una poda muy común que también hemos implementado es la de la solución local actual. Dada una solución posible (que aun no sabemos si es la mínima), si en el estado actual del algoritmo se esta considerando un numero de vértices que no le puede ganar a esta solución, ignoramos esa rama del árbol de estados posibles.
+Una poda muy común que también hemos implementado es la de la solución local actual. Dada una solución posible (que aún no sabemos si es la mínima), si en el estado actual del algoritmo se está considerando un número de vértices que no le puede ganar a esta solución, ignoramos esa rama del árbol de estados posibles. Esto se puede verificar en \order{1}, dado que solo hay que comparar el numero actual de nodos agregados con el numero de nodos en la mejor solución encontrada hasta el momento.
+
+\pagebreak
 
 \subsection{Complejidad}
 
-\subsection{Complejidad Espacial}
+\subsubsection{Pseudocódigo}
+
+\begin{algorithmic}
+\Procedure{backtracking}{G, nodoActual, nodosCubiertos, nodosUsados, solucionLocal, nodosEnSolucion}
+
+\If{nodoActual == G.size} \State{return} \EndIf
+\If{G[nodoActual].alcanzable == true} \State{return backtracking(G, nodoActual + 1, nodosCubiertos, nodosUsados, solucionLocal, nodosEnSolucion)} \EndIf
+\If{nodosUsados + 1 == nodosUsadosEnSolucion)} \State{return} \EndIf
+
+\State{G[current].added $\gets$ true}
+\State{agregados $\gets$ 0}
+\State{adjNodes $\gets$ emptyList()}
+\ForAll{$adj \in G[current].adj$}
+	\If{G[adj].alcanzable == false}
+		\State{G[adj].alcanzable $\gets$ true}
+		\State{added.push\_front(adj)}
+		\State{agregados++}
+	\EndIf
+\EndFor
+
+\If{nodosCubiertos + agregados + 1 == n}
+	\State{nodosEnSolucion++}
+	\State{solucionLocal $\gets$ G}
+\Else
+	\State{backtracking(G, nodoActual + 1, nodosCubiertos, nodosUsados + 1, solucionLocal, nodosEnSolucion)}
+\EndIf
+
+\ForAll{$e \in adjNodes$}
+	\State{G[e] $\gets$ false}
+\EndFor
+
+\State{backtracking(G, nodoActual + 1, nodosCubiertos, nodosUsados, solucionLocal, nodosEnSolucion)}
+
+\EndProcedure
+\end{algorithmic}
+
+\subsubsection{Complejidad Espacial}
 Para la representación del grafo, utilizamos un arreglo de nodos. Cada nodo tiene una lista de adyacencia. Por lo tanto, la complejidad espacial de nuestro algoritmo es de \order{n + 2m}, donde $n$ es la cantidad total de vértices y $m$ la cantidad total de aristas.
 
-\subsection{Complejidad Temporal}
-Nuestro algoritmo, sin considerar las podas, recorre cada conjunto independiente dominante una vez. Cada vez que encuentra uno, lo guarda en una estructura auxiliar en \order{n}. Si todos los nodos tienen grado 0, son agregados automaticamente, y el algoritmo resuelve el problema en $n$ iteraciones.
-En el peor de los casos, el algoritmo recorre todos los conjuntos independientes y dominantes, comenzando con el de mayor cardinalidad. Cada vez que lo encuentra, actualiza la estructura donde guardamos la solución. Para que esto suceda, en realidad todos los conjuntos dominantes deben tener diferente cardinalidad, cosa que en general no sucede. Como todo conjunto tiene $2^n$ subconjuntos, utilizaremos esto para acotar la cantidad de veces que actualiza la solución local. Seguramente hay una cota teórica mucho mejor.
+\subsubsection{Complejidad Temporal}
+Al utilizar backtracking, si no consideramos ninguna poda recorremos todos los conjuntos independientes y dominantes una vez. Esto lo hacemos iterando un arreglo de nodos. Al agregar un nodo, marcamos a todos sus adyacentes como alcanzables y seguimos con el siguiente nodo.
+
+Cada llamada recursiva (agrego o no el proximo nodo) tiene como mínimo un costo de \order{\Delta(G)} \footnote{$\Delta(G)$ denota el máximo grado de un vértice perteneciente al grafo.}. Esto se debe a que en primer lugar modificamos el grafo agregando un nodo y modificando los atributos de a lo sumo $\Delta(G)$ nodos adyacentes. Al finalizar la llamada recursiva, debemos restaurar el atributo \texttt{reachable} de a lo sumo $\Delta(G)$ nodos.
+
+Las podas que se aplican dentro de las llamadas recursivas no empeoran la complejidad del algoritmo, dado que estan en \order{1}. La efectividad de las mismas la mostraremos luego en la experimentación.
+
+Cuando encuentra un conjunto solución, lo guarda en una estructura auxiliar en \order{n}. En el peor de los casos, el algoritmo recorre todos los conjuntos independientes y dominantes, comenzando con el de mayor cardinalidad. Cada vez que lo encuentra, actualiza la estructura donde guardamos la solución. Para que esto suceda, en realidad todos los conjuntos dominantes deben tener diferente cardinalidad, cosa que en general no sucede. Como todo conjunto de $n$ elementos tiene $2^n$ subconjuntos, utilizaremos esto para acotar la cantidad de veces que actualiza la solución local. Seguramente hay una cota teórica mucho mejor.
+
+Sin considerar que hay ramas que ignoramos en cada llamada recursiva al forzar la independencia del conjunto por construcción, tenemos a lo sumo $2^n$ llamadas. Cada llamada debe restaurar el grafo a su estado original al finalizar y/o guardar la solución actual. Por lo tanto, el algoritmo pertenece a \order{(n+\Delta(G)) \times 2^n}, que es lo mismo que \order{n \times 2^n}. Esto se podría reducir primero buscando el tamaño de la solución optima, y luego buscándola a \order{2^n}. Sin embargo no seria efectivo en términos de tiempo dado que deberíamos rearmar gran parte del árbol nuevamente.
 
 %Sin embargo, asumir que si sirve para acotar la complejidad. Moon \& Moser probaron que un grafo de $n$ vértices tiene a lo sumo $3^{n/3}$ conjuntos independientes y dominantes 
 %\footnote{Moon, J. W.; Moser, Leo (1965), 'On cliques in graphs', Israel Journal of Mathematics 3 (1): 23–28, doi:10.1007/BF02760024}. Por lo tanto, una cota no muy buena para la actualización de soluciones locales es \order{n \times 3^{n/3}}.z
-
-Por otro lado, recorremos cada vértice y sus aristas adyacentes una vez por iteración. Aunque por construcción forzamos la independencia de los vértices, para poder acotar la complejidad supongamos que no ignora ninguna ramificación. Por lo tanto, la cantidad de nodos recorridos esta acotada por $2^n$. Esto significa que el algoritmo pertenece a \order{n \times 2^n}.
