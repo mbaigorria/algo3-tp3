@@ -2,7 +2,7 @@
 
 \subsection{Algoritmo}
 
-GRASP (Greedy Randomized Adaptative Search Procedure) es una combinación entre una heuristica golosa aleatorizada y un procedimiento de búsqueda local. La metaheurística se puede ver con el siguiente pseudocódigo:
+GRASP (Greedy Randomized Adaptative Search Procedure) es una combinación entre una heurística golosa aleatorizada y un procedimiento de búsqueda local. La metaheurística se puede ver con el siguiente pseudocódigo:
 
 \begin{algorithmic}
 \Procedure{grasp}{G, k}
@@ -19,15 +19,55 @@ GRASP (Greedy Randomized Adaptative Search Procedure) es una combinación entre 
 
 De este procedimiento surgen dos preguntas, que en realidad son cosas que debemos definir. De donde proviene la aleatoriedad de la heurística greedy? Cual es criterio de terminación que utilizaremos?
 
-\subsubsection{Random Greedy Heuristic}
+\subsection{Random Greedy Heuristic}
 
-\begin{enumerate}
-\item \underline{Por cantidad}:
-Para agregarle una componente aleatoria a \texttt{GRASP}, se propone fabricar en cada paso de la heurística constructiva golosa una \textit{Lista Restricta de Candidatos} (RCL) y elegir aleatoriamente un candidato de esta lista. Para ello, decidimos crear la función \texttt{greedyHeapConstructiveRandomized(Node graph[], int n, int k)} que lo que hace es ir eligiendo los $k$ vértices con mayor grado utilizando un heap como estructura auxiliar.
-\item \underline{Por valor:} Al igual que en el criterio anterior, elegimos un candidato aleatorio de una lista desde un heap. Sin embargo, ahora un vértice esta en la lista de candidatos si y solo si el grado de cualquier nodo en la lista esta a una distancia de $k$ grados del vértice de mayor grado.
-\end{enumerate}
+\subsubsection{Por cantidad}
 
-\subsubsection{Criterios de terminación}
+Para agregarle una componente aleatoria a \texttt{GRASP}, se propone fabricar en cada paso de la heurística constructiva golosa una \textit{Lista Restricta de Candidatos} (RCL) y elegir aleatoriamente un candidato de esta lista. Para ello, decidimos crear la función \texttt{greedyHeapConstructiveRandomized(Node graph[], int n, int k)} que lo que hace es ir eligiendo aleatoriamente de  los $k$ vértices con mayor grado utilizando un heap como estructura auxiliar. Esto se puede ver en el siguiente pseudocódigo:
+
+\begin{algorithmic}
+\Procedure{greedyHeapConstructiveRandomized}{G,k}
+
+\State{nodeHeap $\gets$ buildHeap(G.V)}
+
+\While{!nodeHeap.isEmpty()}
+	\State{node $\gets$ nodeHeap.topRandomPop(k)}
+	\If{node.reachable == true}
+		\State{continue}
+	\EndIf
+	\State{node.added = true}
+	
+	\ForAll{$adj \in node.adj$}
+		\State{adj.reachable $\gets$ true}
+	\EndFor
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+\subsubsection{Por valor}
+
+Al igual que en el criterio anterior, elegimos un candidato aleatorio de una lista desde un heap. Sin embargo, ahora un vértice está en la lista de candidatos si y sólo si el grado de cualquier nodo en la lista esta a una distancia menor o igual a $k$ grados del vértice de mayor grado disponible en el heap. Esto se puede ver en el siguiente pseudocódigo:
+
+\begin{algorithmic}
+\Procedure{greedyHeapConstructiveRandomized}{G,k}
+
+\State{nodeHeap $\gets$ buildHeap(G.V)}
+
+\While{!nodeHeap.isEmpty()}
+	\State{node $\gets$ nodeHeap.topRandomPopByValue(k)}
+	\If{node.reachable == true}
+		\State{continue}
+	\EndIf
+	\State{node.added = true}
+	
+	\ForAll{$adj \in node.adj$}
+		\State{adj.reachable $\gets$ true}
+	\EndFor
+\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+\subsection{Criterios de terminación}
 \begin{enumerate}
 \item No se encontró ninguna mejora en las ultimas $j$ iteraciones.
 \item Se alcanzo un límite prefijado de  $j$ iteraciones.
