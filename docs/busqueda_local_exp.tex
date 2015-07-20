@@ -72,7 +72,7 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.5]{graph/{output_local_1_4_arbol.csvTime}.pdf}
 	\begin{center}
-	Arboles Binarios
+	Árboles Binarios
 	\end{center}
 \end{subfigure}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -102,7 +102,7 @@ n = 120 & 74                           & 55                         & 28     \\ 
 
 Los tamaños obtenidos en el caso aleatorio son los mismos que los obtenidos mediante la solución inicial, es decir, la búsqueda local no mejoro ninguna de las soluciones.
 
-Para los Grafos Bipartitos, los $d$-regulares y las cliques, el algoritmo encontró la solución optima en todos los casos. Respecto a los arboles, la solución del algoritmo siempre respeto la cota y el resultado fue el menor posible.
+Para los Grafos Bipartitos, los $d$-regulares y las cliques, el algoritmo encontró la solución optima en todos los casos. Respecto a los Árboles, la solución del algoritmo siempre respeto la cota y el resultado fue el menor posible.
 
 \subsubsection{Heurística Constructiva Golosa por Scoring con Búsqueda Local por Segunda Vecinidad}
 
@@ -174,7 +174,7 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.5]{graph/{output_local_2_4_arbol.csvTime}.pdf}
 	\begin{center}
-	Arboles Binarios
+	Árboles Binarios
 	\end{center}
 \end{subfigure}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -274,7 +274,7 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.5]{graph/{output_local_3_4_arbol.csvTime}.pdf}
 	\begin{center}
-	Arboles Binarios
+	Árboles Binarios
 	\end{center}
 \end{subfigure}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -302,7 +302,7 @@ n = 120 & 74                           & 66                         & 46     \\ 
 \caption{Grafos aleatorios. Los números en la tabla muestran la cantidad de vértices en el conjunto dominante independiente final.}
 \end{table}
 
-Al igual que con el primer criterio de vecinidad, en el caso de los aleatorios la solución no mejoro, se mantuvo en los mismo valores de la original. Sin embargo, este presento mejoras en los Arboles, dando una solución menor.
+Al igual que con el primer criterio de vecinidad, en el caso de los aleatorios la solución no mejoro, se mantuvo en los mismo valores de la original. Sin embargo, este presento mejoras en los Árboles, dando una solución menor.
 
 \subsubsection{Heurística Constructiva Golosa por Grado con Búsqueda Local por Segunda Vecinidad}
 
@@ -374,7 +374,7 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.5]{graph/{output_local_4_4_arbol.csvTime}.pdf}
 	\begin{center}
-	Arboles Binarios
+	Árboles Binarios
 	\end{center}
 \end{subfigure}
 \begin{subfigure}[h]{0.4\textwidth}
@@ -412,7 +412,7 @@ Primero vamos a ver los resultados por cada familia.
 	\item Grafos Aleatorios: Como era de esperar la cantidad de conexiones volvió a impactar en el tiempo de cada algoritmo. También pudimos apreciar el costo agregado del segundo criterio de vecindad, ya que en los casos donde se lo aplico, los tiempos aumentaron de manera considerable.
 	\item Grafos Bipartitos: El tiempo de convergencia al aplicar el segundo criterio de vecindad aumento considerablemente, esto es un detrimento importante, ya que la solución inicial no fue mejorada.
 	\item Grafos $d$-regulares: Aquí también los tiempos de ejecucion aumentaron, sin embargo, el aumento no fue tan pronunciado como en las dos familias anteriores.
-	\item Arboles binarios: A diferencia de los casos anteriores, los tiempos obtenidos aquí no difieren mucho entre vecinidades. Estas tampoco pudieron lograr una mejora importante respecto a la solucion original.
+	\item Árboles binarios: A diferencia de los casos anteriores, los tiempos obtenidos aquí no difieren mucho entre vecinidades. Estas tampoco pudieron lograr una mejora importante respecto a la solucion original.
 	\item Cliques: En las cliques sabemos que toda solución puede tener a lo sumo un nodo, con lo cual la misma no puede ser mejorada. Los dos criterios de vecinidad tomaron tiempos similares de ejecucion.
 \end{itemize}
 
