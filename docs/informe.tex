@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[paper=a4paper, hmargin=1.5cm, bottom=1.5cm, top=3cm]{geometry}
 
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage[spanish]{babel}
 
 \usepackage{mathtools}
@@ -22,6 +22,7 @@
 
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{relsize}
 
 \usepackage{chessboard}
 \storechessboardstyle{6x6}{maxfield=h8}
@@ -113,6 +114,8 @@ Segunda entrega &         &      \\ \hline
 
 \input{introduccion}
 \newpage
+\input{descripcion_exp}
+\newpage
 
 \input{backtracking}
 \newpage
@@ -121,7 +124,7 @@ Segunda entrega &         &      \\ \hline
 
 \input{golosa}
 \newpage
-%\input{golosa_exp}
+\input{golosa_exp}
 \newpage
 
 \input{busqueda_local}
