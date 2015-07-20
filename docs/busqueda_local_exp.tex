@@ -1,35 +1,35 @@
-\subsection{Experimentacion}
+\subsection{Experimentación}
 
-Para la experimentacion se siguio con la metodologia indicada anteriormente. Los resultados fueron los siguientes.
+Para la experimentación se siguió con la metodología indicada anteriormente. Los resultados fueron los siguientes.
 
-\subsubsection{Heuristica Constructiva Golosa por Scoring con Busqueda Local por primer Vecinidad}
+\subsubsection{Heurística Constructiva Golosa por Scoring con Búsqueda Local por primer Vecinidad}
 
 Los resultados temporales obtenidos fueron los siguientes:
 
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_1_n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_1_n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = n$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_1_2n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_1_2n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = 2n$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_1_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_1_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_3_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_3_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
 	\end{center}
@@ -39,61 +39,54 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_3_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_3_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_2_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_2_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($d = \frac{n}{4}$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_2_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_2_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_2_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_2_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{3n}{4}$)
 	\end{center}
 \end{subfigure}
 \end{figure}
 
-\newpage
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_4_arbol.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_4_arbol.csvTime}.pdf}
 	\begin{center}
 	Arboles Binarios
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_1_1_clique.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_1_1_clique.csvTime}.pdf}
 	\begin{center}
 	Clique
 	\end{center}
 \end{subfigure}
-\begin{center}
-Greedy Heap
-\end{center}
 \end{figure}
 
-\newpage
-
-Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+Para el análisis del tamaño de la solución, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguientes:
 
 \begin{table}[H]
 \centering
-\caption{Grafos aleatorios}
 \label{my-label}
 \begin{tabular}{|l|lll|}
 \hline
@@ -104,41 +97,41 @@ n = 80  & 49                           & 33                         & 21     \\ 
 n = 100 & 59                           & 42                         & 24     \\ \cline{1-1}
 n = 120 & 74                           & 55                         & 28     \\ \hline
 \end{tabular}
+\caption{Grafos aleatorios. Los números en la tabla muestran la cantidad de vértices en el conjunto dominante independiente final.}
 \end{table}
 
-Los tamaños obtenidos en el caso aleatorio son los mismo que los obtenidos mediante la solucion inicial, es decir, la busqueda local no mejoro ninguna de las soluciones.
+Los tamaños obtenidos en el caso aleatorio son los mismos que los obtenidos mediante la solución inicial, es decir, la búsqueda local no mejoro ninguna de las soluciones.
 
-Para los Grafos Bipartitos, los $d$-regulares y las cliques, el algoritmo encontro la solucion optima en todos los casos. Respecto a los arboles, la solucion del algoritmo siempre respeto la cota y el resultado fue el menor posible.
+Para los Grafos Bipartitos, los $d$-regulares y las cliques, el algoritmo encontró la solución optima en todos los casos. Respecto a los arboles, la solución del algoritmo siempre respeto la cota y el resultado fue el menor posible.
 
-\newpage
-\subsubsection{Heuristica Constructiva Golosa por Scoring con Busqueda Local por segunda Vecinidad}
+\subsubsection{Heurística Constructiva Golosa por Scoring con Búsqueda Local por segunda Vecinidad}
 
 Los resultados temporales obtenidos fueron los siguientes:
 
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_1_n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_1_n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = n$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_1_2n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_1_2n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = 2n$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_1_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_1_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_3_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_3_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
 	\end{center}
@@ -148,60 +141,54 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_3_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_3_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_2_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_2_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($d = \frac{n}{4}$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_2_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_2_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_2_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_2_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{3n}{4}$)
 	\end{center}
 \end{subfigure}
 \end{figure}
 
-\newpage
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_4_arbol.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_4_arbol.csvTime}.pdf}
 	\begin{center}
 	Arboles Binarios
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_2_1_clique.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_2_1_clique.csvTime}.pdf}
 	\begin{center}
 	Clique
 	\end{center}
 \end{subfigure}
-\begin{center}
-Greedy Heap
-\end{center}
 \end{figure}
 
-\newpage
-Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+Para el análisis del tamaño de la solución, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguientes:
 
 \begin{table}[H]
 \centering
-\caption{Grafos aleatorios}
 \label{my-label}
 \begin{tabular}{|l|lll|}
 \hline
@@ -212,39 +199,39 @@ n = 80  & 49                           & 33                         & 21     \\ 
 n = 100 & 59                           & 42                         & 24     \\ \cline{1-1}
 n = 120 & 74                           & 55                         & 28     \\ \hline
 \end{tabular}
+\caption{Grafos aleatorios. Los números en la tabla muestran la cantidad de vértices en el conjunto dominante independiente final.}
 \end{table}
 
-Al igual que con la primer vecinidad, no se pudo mejorar la solucion original. Respecto al resto de las familias, las soluciones fueron optimas y los resultados fueron cercanos a las cotas de cada familia.
+Al igual que con la primer vecinidad, no se pudo mejorar la solución original. Respecto al resto de las familias, las soluciones fueron optimas y los resultados fueron cercanos a las cotas de cada familia.
 
-\newpage
-\subsubsection{Heuristica Constructiva Golosa por Grado con Busqueda Local por primer Vecinidad}
+\subsubsection{Heurística Constructiva Golosa por Grado con Búsqueda Local por primer Vecinidad}
 
 Los resultados temporales obtenidos fueron los siguientes:
 
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_1_n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_1_n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = n$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_1_2n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_1_2n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = 2n$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_1_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_1_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_3_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_3_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
 	\end{center}
@@ -254,60 +241,54 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_3_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_3_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_2_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_2_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($d = \frac{n}{4}$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_2_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_2_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_2_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_2_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{3n}{4}$)
 	\end{center}
 \end{subfigure}
 \end{figure}
 
-\newpage
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_4_arbol.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_4_arbol.csvTime}.pdf}
 	\begin{center}
 	Arboles Binarios
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_3_1_clique.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_3_1_clique.csvTime}.pdf}
 	\begin{center}
 	Clique
 	\end{center}
 \end{subfigure}
-\begin{center}
-Greedy Heap
-\end{center}
 \end{figure}
 
-\newpage
-Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+Para el análisis del tamaño de la solución, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguientes:
 
 \begin{table}[H]
 \centering
-\caption{Grafos Aleatorios}
 \label{my-label}
 \begin{tabular}{|l|lll|}
 \hline
@@ -318,39 +299,39 @@ n = 80  & 56                           & 44                         & 30     \\ 
 n = 100 & 67                           & 56                         & 40     \\ \cline{1-1}
 n = 120 & 74                           & 66                         & 46     \\ \hline
 \end{tabular}
+\caption{Grafos aleatorios. Los números en la tabla muestran la cantidad de vértices en el conjunto dominante independiente final.}
 \end{table}
 
-Al igual que con el primer criterio de vecinidad, en el caso de los aleatorios la solucion no mejoro, se mantuvo en los mismo valores de la original. Sin embargo, este presento mejoras en los Arboles, dando una solucion menor.
+Al igual que con el primer criterio de vecinidad, en el caso de los aleatorios la solución no mejoro, se mantuvo en los mismo valores de la original. Sin embargo, este presento mejoras en los Arboles, dando una solución menor.
 
-\newpage
-\subsubsection{Heuristica Constructiva Golosa por Grado con Busqueda Local por segunda Vecinidad}
+\subsubsection{Heurística Constructiva Golosa por Grado con Búsqueda Local por segunda Vecinidad}
 
 Los resultados temporales obtenidos fueron los siguientes:
 
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_1_n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_1_n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = n$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_1_2n.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_1_2n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = 2n$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_1_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_1_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_3_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_3_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
 	\end{center}
@@ -360,60 +341,54 @@ Los resultados temporales obtenidos fueron los siguientes:
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_3_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_3_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_2_n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_2_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($d = \frac{n}{4}$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_2_n2.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_2_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_2_3n4.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_2_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{3n}{4}$)
 	\end{center}
 \end{subfigure}
 \end{figure}
 
-\newpage
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_4_arbol.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_4_arbol.csvTime}.pdf}
 	\begin{center}
 	Arboles Binarios
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_1_clique.csvTime}.pdf}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_1_clique.csvTime}.pdf}
 	\begin{center}
 	Clique
 	\end{center}
 \end{subfigure}
-\begin{center}
-Greedy Heap
-\end{center}
 \end{figure}
 
-\newpage
-Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+Para el análisis del tamaño de la solución, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguientes:
 
 \begin{table}[H]
 \centering
-\caption{Grafos Aleatorios}
 \label{my-label}
 \begin{tabular}{|l|lll|}
 \hline
@@ -424,20 +399,21 @@ n = 80  & 52                           & 42                         & 27     \\ 
 n = 100 & 65                           & 51                         & 31     \\ \cline{1-1}
 n = 120 & 80                           & 62                         & 40     \\ \hline
 \end{tabular}
+\caption{Grafos aleatorios. Los números en la tabla muestran la cantidad de vértices en el conjunto dominante independiente final.}
 \end{table}
 
-A diferencia de los otros casos, aqui podemos ver como la segunda vecinidad mejoro amplimente el resultado anterior, a tal punto que se llego a un mejor resultado que el obtenido con la Heuristica Constructiva Golosa por Scoring.
+A diferencia de los otros casos, aquí podemos ver como la segunda vecindad mejoro amplimente el resultado anterior, a tal punto que se llego a un mejor resultado que el obtenido con la Heurística Constructiva Golosa por Scoring.
 
-\subsubsection{Conclusion}
+\subsubsection{Conclusión}
 
 Primero vamos a ver los resultados por cada familia.
 
 \begin{itemize}
-	\item Grafos Aleatorios: Como era de esperar la cantidad de conexiones volvio a impactar en el tiempo de cada algoritmo. Tambien pudimos apreciar el costo agregado del segundo criterio de vecinidad, ya que en los casos donde se lo aplico, los tiempos aumentaron de manera considerable.
-	\item Grafos Bipartitos: El tiempo de convergencia al aplicar el segundo criterio de vecinidad aumento considerablemente, esto es un detrimento importante, ya que la solucion inicial no fue mejorada.
-	\item Grafos $d$-regulares: Aqui tambien los tiempos de ejecucion aumentaron, sin embargo, el aumento no fue tan pronunciado como en las dos familias anteriores.
-	\item Arboles binarios: A diferencia de los casos anteriores, los tiempos obtenidos aqui no difirien mucho entre vecinidades. Estas tampoco pudieron lograr una mejora importante respecto a la solucion original.
-	\item Cliques: En las cliques sabemos que toda solucion puede tener a lo sumo un nodo, con lo cual la misma no puede ser mejorada. Los dos criterios de vecinidad tomaron tiempos similares de ejecucion.
+	\item Grafos Aleatorios: Como era de esperar la cantidad de conexiones volvió a impactar en el tiempo de cada algoritmo. También pudimos apreciar el costo agregado del segundo criterio de vecindad, ya que en los casos donde se lo aplico, los tiempos aumentaron de manera considerable.
+	\item Grafos Bipartitos: El tiempo de convergencia al aplicar el segundo criterio de vecindad aumento considerablemente, esto es un detrimento importante, ya que la solución inicial no fue mejorada.
+	\item Grafos $d$-regulares: Aquí también los tiempos de ejecucion aumentaron, sin embargo, el aumento no fue tan pronunciado como en las dos familias anteriores.
+	\item Arboles binarios: A diferencia de los casos anteriores, los tiempos obtenidos aquí no difieren mucho entre vecinidades. Estas tampoco pudieron lograr una mejora importante respecto a la solucion original.
+	\item Cliques: En las cliques sabemos que toda solución puede tener a lo sumo un nodo, con lo cual la misma no puede ser mejorada. Los dos criterios de vecinidad tomaron tiempos similares de ejecucion.
 \end{itemize}
 
-La eficiencia del primer criterio de vecinidad fue limitada, si bien el mismo no introducia mucho tiempo extra en la ejecucion del algoritmo, no podia mejorar las solucion por un margen razonable. Por el otro lado, el segundo criterio de vecinidad logro demostrar su efectividad para poder mejorar soluciones, pero esto tuvo un costo temporal grande. Consideramos que la mejor heuristicas de las presentadas en este punto es la Heuristica Constructiva Golosa por Grado con Busqueda Local por segunda Vecinidad, si bien la Busqueda Local agrega una cantidad considerable de tiempo a la ejecucion, los resultados mejorar ampliamente, superando includo los de la Heuristica Constructiva Golosa por Scoring.
+La eficiencia del primer criterio de vecinidad fue limitada, si bien el mismo no introducía mucho tiempo extra en la ejecución del algoritmo, no podía mejorar las solución por un margen razonable. Por el otro lado, el segundo criterio de vecinidad logro demostrar su efectividad para poder mejorar soluciones, pero esto tuvo un costo temporal grande. Consideramos que la mejor Heurísticas de las presentadas en este punto es la Heurística Constructiva Golosa por Grado con Búsqueda Local por segunda Vecinidad, si bien la Búsqueda Local agrega una cantidad considerable de tiempo a la ejecución, los resultados mejorar ampliamente, superando incluso los de la Heurística Constructiva Golosa por Scoring.
