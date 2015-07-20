@@ -1,6 +1,6 @@
-\subsection{Experimentacion}
+\subsection{Experimentación}
 
-Para la experimentacion se siguio con la metodologia indicada anteriormente. Los resultados fueron los siguientes.
+Para la experimentación se siguió con la metodología indicada anteriormente. Los resultados fueron los siguientes.
 
 \subsubsection{Heuristica Constructiva Golosa por Grado}
 
@@ -91,14 +91,14 @@ Greedy Heap
 Primero vamos a ver los resultados por cada familia.
 
 \begin{itemize}
-	\item Grafos Aleatorios: En este caso podemos ver que la cantidad de conexiones entre nodos afecto al tiempo, igualmente el impacto no fue tan grande como esperabamos, en el caso $n = 120$ la diferencia entre $m = \frac{n}{4}$ y $m = 2n$ fue, en promedio, de 218 segundos.
-	\item Grafos Bipartitos: En este caso nos sorprendio el tiempo que tardo el algoritmo en poder encontrar solucion, consideramos que esto se debe a que en un grafo bipartito completo existen solo dos posibles cubrimientos. Otro detalle a destacar, fue el aumento en tiempo que hubo mientras mas equilibradas se encontraban las dos componentes del grafo, con $\frac{3n}{4}$ nodos en la segunda compente se convergio a un resultado en un tiempo mucho mayor.
-	\item Grafos $d$-regulares: Aqui a diferencia de los grafos aleatorios, al haber una diferencia mas marcada entre la cantidad de conexiones se puede ver en el grafico que la diferencia entre $d = \frac{n}{4}$ y $d = \frac{3n}{4}$ es muy marcada, la misma siendo de varios minutos.
-	\item Arboles binarios: En este caso lamentablemente no es posible hacer un analisis detallado, ya que los resultados no fueron regulares. Sin embargo, podemos destacar, que los resultados se obtuvieron en un tiempo razonable.
+	\item Grafos Aleatorios: En este caso podemos ver que la cantidad de conexiones entre nodos afecto al tiempo, igualmente el impacto no fue tan grande como esperábamos, en el caso $n = 120$ la diferencia entre $m = \frac{n}{4}$ y $m = 2n$ fue, en promedio, de 218 segundos.
+	\item Grafos Bipartitos: En este caso nos sorprendió el tiempo que tardo el algoritmo en poder encontrar solución, consideramos que esto se debe a que en un grafo bipartito completo existen solo dos posibles cubrimientos. Otro detalle a destacar, fue el aumento en tiempo que hubo mientras mas equilibradas se encontraban las dos componentes del grafo, con $\frac{3n}{4}$ nodos en la segunda componente se convergió a un resultado en un tiempo mucho mayor.
+	\item Grafos $d$-regulares: Aquí a diferencia de los grafos aleatorios, al haber una diferencia mas marcada entre la cantidad de conexiones se puede ver en el gráfico que la diferencia entre $d = \frac{n}{4}$ y $d = \frac{3n}{4}$ es muy marcada, la misma siendo de varios minutos.
+	\item Arboles binarios: En este caso lamentablemente no es posible hacer un análisis detallado, ya que los resultados no fueron regulares. Sin embargo, podemos destacar, que los resultados se obtuvieron en un tiempo razonable.
 	\item Cliques: Las cliques se comportaron de manera esperada, al ser un caso facil de resolver el algoritmo no tuvo mayores dificultades.
 \end{itemize}
 
-Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+Para el análisis del tamaño de la solución, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
 
 \begin{table}[]
 \centering
@@ -115,37 +115,37 @@ n = 120 & 74                           & 55                         & 28     \\ 
 \end{tabular}
 \end{table}
 
-Los tamaños de resultados se comportaron de manera esperada, es decir, a medida que avanzo la cantidad de conexion se redujo el tamaño de solucion.
+Los tamaños de resultados se comportaron de manera esperada, es decir, a medida que avanzo la cantidad de conexión se redujo el tamaño de solución.
 
-Para los Grafos Bipartitos, los $d$-regulares y las cliques, el algoritmo encontro la solucion optima en todos los casos. Respecto a los arboles, la solucion del algoritmo siempre respeto la cota y el resultado fue el menor posible.
+Para los Grafos Bipartitos, los $d$-regulares y las cliques, el algoritmo encontró la solución optima en todos los casos. Respecto a los arboles, la solución del algoritmo siempre respeto la cota y el resultado fue el menor posible.
 
-\subsubsection{Heuristica Constructiva Golosa por Scoring}
+\subsubsection{Heurística Constructiva Golosa por Scoring}
 
 Los resultados temporales obtenidos fueron los siguientes:
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_1_n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = n$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_1_2n.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = 2n$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_1_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos Aleatorios ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_3_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
@@ -153,29 +153,29 @@ Los resultados temporales obtenidos fueron los siguientes:
 \end{subfigure}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_3_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_2_n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($d = \frac{n}{4}$)
 	\end{center}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_2_n2.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{n}{2}$)
 	\end{center}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[h]{0.4\textwidth}
 	\includegraphics[scale=0.6]{graph/{output_greedy_2_2_3n4.csvTime}.pdf}
 	\begin{center}
 	Grafos $d$-regulares ($m = \frac{3n}{4}$)
@@ -207,9 +207,9 @@ Greedy Heap
 \newpage
 Primero vamos a ver los resultados por cada familia.
 
-Los resultados obtenidos por familia no difirieron en gran medida respecto a lo obtenido con la Heuristica Constructiva Golosa por Grado, con lo cual respecto al tiempo se derivan las misma conclusiones de antes.
+Los resultados obtenidos por familia no difirieron en gran medida respecto a lo obtenido con la Heurística Constructiva Golosa por Grado, con lo cual respecto al tiempo se derivan las misma conclusiones de antes.
 
-Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+Para el análisis del tamaño de la solución, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
 
 \begin{table}[]
 \centering
@@ -226,8 +226,8 @@ n = 120 & 74                           & 66                         & 46     \\ 
 \end{tabular}
 \end{table}
 
-Aqui es donde la diferencia es mas marcada, para los mismos casos, la Heuristica por Scoring dio resultados significativamente peores en el caso aleatorio. Esto tambien se vio reflejado en las otras familias tambien, particularmente en el caso de los bipartitos donde siempre se priorizo la solucion mas grande.
+Aquí es donde la diferencia es mas marcada, para los mismos casos, la Heurística por Scoring dio resultados significativamente peores en el caso aleatorio. Esto también se vio reflejado en las otras familias también, particularmente en el caso de los bipartitos donde siempre se priorizo la solución mas grande.
 
-\subsubsection{Conclusion}
+\subsubsection{Conclusión}
 
-En lo que respecta al tiempo de ejecucion, las heuristicas no se comportaron de manera muy diferente, el tiempo fue similar. Sin embargo, el lugar donde se noto la diferencia fue en el tamaño de las soluciones obtenidas, en practicamente todos los casos, la Heuristica Constructiva por Grado dio mejor resultado, con lo cual consideramos que de las golosas, es mejor la selccion por grado que por scoring.
+En lo que respecta al tiempo de ejecución, las heurísticas no se comportaron de manera muy diferente, el tiempo fue similar. Sin embargo, el lugar donde se noto la diferencia fue en el tamaño de las soluciones obtenidas, en prácticamente todos los casos, la Heurística Constructiva por Grado dio mejor resultado, con lo cual consideramos que de las golosas, es mejor la selección por grado que por scoring.
