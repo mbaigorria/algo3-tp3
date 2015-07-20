@@ -972,4 +972,40 @@ Podemos ver claramente que si $j = 3$, obtenemos los mejores resultados. Tambié
 \end{subfigure}
 \end{figure}
 
-A diferencia del caso de $j$, aquí no hubo un impacto tan grande, si bien hubo diferencias, al variar el valor de $j$, no solo cambio el tiempo de convergencia, sino que ademas se estabilizo el tiempo promedio. Consideramos que si tomamos $j = 3$ y $k = 5$ pudimos conseguir una buena configuración, un análisis mas exhaustivo habría sido analizar las 100 posibles combinaciones tomando valores entre 1 y 10 para $j$ y $k$. Sin embargo, los resultados obtenidos fueron buenos.
+A diferencia del caso de $j$, aquí no hubo un impacto tan grande, si bien hubo diferencias, al variar el valor de $j$, no solo cambio el tiempo de convergencia, sino que ademas se estabilizo el tiempo promedio.
+
+Ademas de los tiempos, tambien analizamos los tamaños de las soluciones obtenidas, para poder tomar una mejor decision:
+
+\begin{table}[H]
+\centering
+\caption{Tamaños de soluciones}
+\label{my-label}
+\begin{tabular}{|l|lllll|}
+\hline
+       & \multicolumn{1}{l|}{n = 10} & \multicolumn{1}{l|}{n = 15} & \multicolumn{1}{l|}{n = 20} & \multicolumn{1}{l|}{n = 25} & n = 30 \\ \hline
+k = 1  & 3                           & 4                           & 7                           & 10                          & 11     \\ \cline{1-1}
+k = 2  & 3                           & 5                           & 6                           & 10                          & 11     \\ \cline{1-1}
+k = 3  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+k = 4  & 2                           & 5                           & 6                           & 10                          & 9      \\ \cline{1-1}
+k = 5  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+k = 6  & 3                           & 5                           & 5                           & 10                          & 11     \\ \cline{1-1}
+k = 7  & 3                           & 4                           & 6                           & 10                          & 10     \\ \cline{1-1}
+k = 8  & 3                           & 5                           & 6                           & 9                           & 9      \\ \cline{1-1}
+k = 9  & 3                           & 5                           & 6                           & 10                          & 9      \\ \cline{1-1}
+k = 10 & 3                           & 5                           & 7                           & 9                           & 9      \\ \cline{1-1}
+j = 1  & 3                           & 6                           & 7                           & 10                          & 11     \\ \cline{1-1}
+j = 2  & 3                           & 5                           & 7                           & 10                          & 11     \\ \cline{1-1}
+j = 3  & 3                           & 5                           & 7                           & 10                          & 11     \\ \cline{1-1}
+j = 4  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+j = 5  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+j = 6  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+j = 7  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+j = 8  & 3                           & 5                           & 7                           & 10                          & 10     \\ \cline{1-1}
+j = 9  & 3                           & 4                           & 7                           & 10                          & 10     \\ \cline{1-1}
+j = 10 & 3                           & 4                           & 7                           & 10                          & 10     \\ \hline
+\end{tabular}
+\end{table}
+
+La variacion de paremetros no afecto fuertemente la calidad de las soluciones, si bien hubo casos en donde mejoro. Consideramos que si tomamos $j = 3$ y $k = 5$ pudimos conseguir una buena configuración, ya que si bien no genera la mejor solucion, la diferencia no es tan grande y el tiempo de convergencia fue considerablemente menor que el del resto.
+
+Un análisis mas exhaustivo habría sido analizar las 100 posibles combinaciones tomando valores entre 1 y 10 para $j$ y $k$. Sin embargo, los resultados obtenidos fueron buenos.
