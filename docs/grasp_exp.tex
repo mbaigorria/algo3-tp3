@@ -1,1 +1,844 @@
-\subsection{Experimentación}
+\subsection{Experimentacion}
+
+Debido a la longitud de los nombres, se utilizo siguiente lista para referirnos a cada una de las configuraciones:
+
+\begin{itemize}
+	\item GRASP1: Greedy por cantidad, Busqueda Local con primer criterio de vecinidad, Terminacion sin mejoras
+	\item GRASP2: Greedy por valor, Busqueda Local con primer criterio de vecinidad, Terminacion sin mejoras
+	\item GRASP3: Greedy por cantidad, Busqueda Local con segundo criterio de vecinidad, Terminacion sin mejoras
+	\item GRASP4: Greedy por cantidad, Busqueda Local con segundo criterio de vecinidad, Terminacion sin mejoras
+	\item GRASP5: Greedy por valor, Busqueda Local con primer criterio de vecinidad, Terminacion prefijada
+	\item GRASP6: Greedy por cantidad, Busqueda Local con primer criterio de vecinidad, Terminacion prefijada
+	\item GRASP7: Greedy por cantidad, Busqueda Local con segundo criterio de vecinidad, Terminacion prefijada
+	\item GRASP8: Greedy por valor, Busqueda Local con segundo criterio de vecinidad, Terminacion prefijada
+\end{itemize}
+
+grasp1 = Midsbyiteration, HeapConstructiveRandomized, LocalSearch
+grasp2 = Midsbyiteration, HeapConstructiveRandomized2, LocalSearch
+grasp3 = Midsbyiteration, HeapConstructiveRandomized, LocalSearch2
+grasp4 = Midsbyiteration, HeapConstructiveRandomized2, LocalSearch2
+grasp5 = Midsbyvalue, HeapConstructiveRandomized, LocalSearch
+grasp6 = Midsbyvalue, HeapConstructiveRandomized2, LocalSearch
+grasp7 = Midsbyvalue, HeapConstructiveRandomized, LocalSearch2
+grasp8 = Midsbyvalue, HeapConstructiveRandomized2, LocalSearch2
+
+Para la experimentacion se siguio con la metodologia indicada anteriormente. Los resultados fueron los siguientes.
+
+\newpage
+\subsubsection{GRASP1}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_1_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 26                           & 21                         & 15     \\ \cline{1-1}
+n = 60  & 39                           & 32                         & 21     \\ \cline{1-1}
+n = 80  & 49                           & 34                         & 25     \\ \cline{1-1}
+n = 100 & 60                           & 49                         & 32     \\ \cline{1-1}
+n = 120 & 75                           & 55                         & 39     \\ \hline
+\end{tabular}
+\end{table}
+
+Para los arboles $d$-regulares y Arboles Binarios, la heuristica GRASP comenzo a mostrar resultados poco eficientes, elgiendo una mayor cantidad de nodos que la habitual. Esta tendencia se da para todas las configuraciones de GRASP.
+
+\newpage
+\subsubsection{GRASP2}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_2_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 29                           & 23                         & 15     \\ \cline{1-1}
+n = 60  & 40                           & 34                         & 22     \\ \cline{1-1}
+n = 80  & 53                           & 39                         & 29     \\ \cline{1-1}
+n = 100 & 62                           & 51                         & 34     \\ \cline{1-1}
+n = 120 & 80                           & 59                         & 41     \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{GRASP3}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos Aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 26                           & 21                         & 14     \\ \cline{1-1}
+n = 60  & 39                           & 32                         & 19     \\ \cline{1-1}
+n = 80  & 49                           & 34                         & 24     \\ \cline{1-1}
+n = 100 & 60                           & 47                         & 30     \\ \cline{1-1}
+n = 120 & 75                           & 55                         & 37     \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{GRASP4}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos Aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 25                           & 19                         & 13     \\ \cline{1-1}
+n = 60  & 40                           & 32                         & 18     \\ \cline{1-1}
+n = 80  & 53                           & 39                         & 26     \\ \cline{1-1}
+n = 100 & 60                           & 49                         & 31     \\ \cline{1-1}
+n = 120 & 76                           & 55                         & 39     \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{GRASP5}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_5_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 26                           & 22                         & 15     \\ \cline{1-1}
+n = 60  & 40                           & 32                         & 20     \\ \cline{1-1}
+n = 80  & 49                           & 35                         & 27     \\ \cline{1-1}
+n = 100 & 60                           & 50                         & 35     \\ \cline{1-1}
+n = 120 & 75                           & 56                         & 39     \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{GRASP6}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_6_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 29                           & 21                         & 15     \\ \cline{1-1}
+n = 60  & 40                           & 31                         & 21     \\ \cline{1-1}
+n = 80  & 53                           & 36                         & 27     \\ \cline{1-1}
+n = 100 & 62                           & 50                         & 37     \\ \cline{1-1}
+n = 120 & 81                           & 56                         & 41     \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{GRASP7}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_7_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos Aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 26                           & 22                         & 14     \\ \cline{1-1}
+n = 60  & 40                           & 31                         & 18     \\ \cline{1-1}
+n = 80  & 49                           & 35                         & 26     \\ \cline{1-1}
+n = 100 & 60                           & 50                         & 34     \\ \cline{1-1}
+n = 120 & 75                           & 56                         & 38     \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsubsection{GRASP8}
+
+Los resultados temporales obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_1_n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = n$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_1_2n.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = 2n$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_1_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos Aleatorios ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_3_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_3_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_2_n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_2_n2.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{n}{2}$)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_2_3n4.csvTime}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($m = \frac{3n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_4_arbol.csvTime}.pdf}
+	\begin{center}
+	Arboles Binarios
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_8_1_clique.csvTime}.pdf}
+	\begin{center}
+	Clique
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Para el analisis del tamaño de la solucion, vamos a ver los resultados por cada familia. En el caso de los aleatorios, los resultados para estas configuraciones fueron los siguiente:
+
+\begin{table}[H]
+\centering
+\caption{Grafos Aleatorios}
+\label{my-label}
+\begin{tabular}{|l|lll|}
+\hline
+        & \multicolumn{1}{l|}{m = n/2} & \multicolumn{1}{l|}{m = n} & m = 2n \\ \hline
+n = 40  & 25                           & 21                         & 16     \\ \cline{1-1}
+n = 60  & 40                           & 31                         & 20     \\ \cline{1-1}
+n = 80  & 53                           & 36                         & 26     \\ \cline{1-1}
+n = 100 & 60                           & 48                         & 34     \\ \cline{1-1}
+n = 120 & 76                           & 54                         & 38     \\ \hline
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Conclusion}
+
+Primero vamos a ver los resultados por cada familia.
+
+\begin{itemize}
+	\item Grafos Aleatorios: Para esta familia los resultados fueron variados, y muchos de ellos pudieron mejorar por un margen amplio a las otras heuristicas vistas con anterioridad, sin tomar un tiempo adicional demasiado grande. Los mejores resultados observados en termino de calidad de soluciones es el de GRASP3, que no solo dio mejor solucion en casi todos los casos, sino que ademas fue de las mas veloces.	
+	\item Grafos Bipartitos: Los tiempos de ejecucion para todas las instancias de GRASP fueron en general bastante elevados para estos casos. Lamentablemente la calidad de las soluciones variaron bastante respecto a las otras heuristicas, la tendencia entre las diferentes implementaciones de todas formas fue muy marcada.
+	\item Grafos $d$-regulares: Esta familia no tuvo buen rendimiento con las diferentes versiones de GRASP. Tambien los resultados obtenidos fueron peores que con las otras Heuristicas implementadas anteriormente.
+	\item Arboles binarios: Al igual que con tas las otras heuristicas, el tiempo que tomo resolver cada uno de los grafos no fue constante. Respecto al tamaño de las soluciones, los resultados obtenidos tendian a alejarse de los valores ideales.
+	\item Cliques: La resolucion de la cliques tomo una sorprendente cantidad de tiempo a medida que avanzaba el tiempo, esto se dio en una gran cantidad de las implementaciones, principalmente en GRASP3, GRASP4, GRASP7 y GRASP8.
+\end{itemize}
+
+Las heuristicas GRASP demostraron que habia un gran margen de mejora para los grafos aleatorios, los resultados obtenidos fueron en su mayoria mejores que los conseguidos aplicando las Heuristicas anteriores, un punto importante a destacar es que el tiempo que tomo la resolucion no fue mucho mayor al de las otras Heuristicas. Lamentablemente, la eficiencia de las diferentes configuraciones de GRASP no se mostraron en las otras familias, inlcuso llegando a casos donde los resultados fueron peores.
+
+A pesar de todo esto, consideramos que la mejor configuracion fue GRASP3, ya que si bien esta no tuvo un buen rendimiento con las familias que no sean la aleatoria, ninguna configuracion fue particularmente buena para el resto de las familias. Valoramos el caso aleatorio principalmente, ya que consideramos que es el que mas chances tenemos de encontrar en un caso real.

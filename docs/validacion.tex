@@ -1,0 +1,62 @@
+\section{Comparacion de eficiencia}
+
+Las familias finalmente escogidas para hacer un nuevo analisis fueron:
+
+\begin{itemize}
+	\item Heuristica Contructiva Golosa por Scoring
+	\item Busqueda local con segundo criterio de vecinidad, utilizando la Heuristica Golosa por Grado para generar la solucion inicial
+	\item GRASP3
+\end{itemize}
+
+Estas fueron las configuracion elegidas producto de la experimentacion realizada anteriormente.
+
+\subsection{Resultados}
+
+Para analizar la eficacia de las configuraciones, nos reservamos una familia de grafos para experimentar, esta es la de union de componentes conexas. La metodologia aplcada fue la misma que en los otros casos, los resultados obtenidos fueron los siguientes:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_greedy_1_5_circulos.csvTime}.pdf}
+	\begin{center}
+	Heuristica Golosa
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_greedy_1_5_circulos.csvSolution}.pdf}
+	\begin{center}
+	Resultado de la Heuristica Golosa
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_local_4_5_circulos.csvTime}.pdf}
+	\begin{center}
+	Busqueda Local
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_local_4_5_circulos.csvSolution}.pdf}
+	\begin{center}
+	Resultado de la Busqueda Local
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_5_circulos.csvTime}.pdf}
+	\begin{center}
+	Grafos Bipartitos ($\frac{3n}{4}$ nodos en la segunda componente)
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_4_5_circulos.csvSolution}.pdf}
+	\begin{center}
+	Grafos $d$-regulares ($d = \frac{n}{4}$)
+	\end{center}
+\end{subfigure}
+\end{figure}
