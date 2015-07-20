@@ -72,7 +72,7 @@ Al igual que con los arboles binarios, para generar estos grafos solo entra en j
 
 Por ultimo se decidió probar con un grafo formado por varias componente conexas, unidas por puentes. Cada una de las componentes conexas es un $C_i$, para generar estos grafos se crean sucesivos $C_i$, tomando inicialmente $i = 1$ y aumentando la cantidad de nodos siempre y cuando la cantidad total de nodos los permita. Una vez que las tenemos generadas, se la comienza a unir de manera sucesiva, es decir, se une $C_1$ con $C_2$, $C_2$ con $C_3$, así hasta llegar al ultimo camino generado. La motivación para probar esta familia es poder analizar el impacto que puede llegar a tener la resolución de cada una de las componentes, teniendo en cuenta la presencia de ejes puentes, los cuales pueden afectar el tiempo que toma resolver el grafo.
 
-Esta familia se reservo para poder hacer \texttt{cross-validation} de las mejores configuraciones posibles.
+Esta familia se reservo para ser utilizada como \texttt{test set} al momento de elegir los parámetros óptimos para GRASP. El resto de las familias las utilizaremos como \texttt{training set}.
 
 \subsection{Metodología}
 
