@@ -38,7 +38,7 @@ Debido a la longitud de los nombres, se decidió numerar las diferentes configur
 %grasp7 = Midsbyvalue, HeapConstructiveRandomized, LocalSearch2 \\
 %grasp8 = Midsbyvalue, HeapConstructiveRandomized2, LocalSearch2 
 
-Para la experimentación se siguió con la metodología indicada anteriormente. Los resultados fueron los siguientes.
+Para la experimentación se siguió con la metodología indicada anteriormente. Las variaciones en los  métodos  no solo provienen de como elegimos la solución inicial, el criterio de localidad y parada, si no que también de la elección de los parámetros $k$ y $j$, donde $k$ es el parámetro utilizado las funciones de solución inicial randomizadas y $j$ es la cantidad de iteraciones. Para experimentar, en primera instancia decidimos utilizar $(k,j) = (7, 7)$. Los resultados fueron los siguientes.
 
 \subsubsection{GRASP1}
 
@@ -800,20 +800,20 @@ n = 120 & 76                           & 54                         & 38     \\ 
 Primero vamos a ver los resultados por cada familia.
 
 \begin{itemize}
-	\item Grafos Aleatorios: Para esta familia los resultados fueron variados, y muchos de ellos pudieron mejorar por un margen amplio a las otras heurísticas vistas con anterioridad, sin tomar un tiempo adicional demasiado grande. Los mejores resultados observados en termino de calidad de soluciones es el de GRASP3, que no solo dio mejor solución en casi todos los casos, sino que ademas fue de las mas veloces.	
+	\item Grafos Aleatorios: Para esta familia los resultados fueron variados, y muchos de ellos pudieron mejorar por un margen amplio a las otras heurísticas vistas con anterioridad, sin tomar un tiempo adicional demasiado grande. Los mejores resultados observados en termino de calidad de soluciones es el de GRASP3, que no solo dio mejor solución en casi todos los casos, sino que ademas fue de las más veloces.	
 	\item Grafos Bipartitos: Los tiempos de ejecución para todas las instancias de GRASP fueron en general bastante elevados para estos casos. Lamentablemente la calidad de las soluciones variaron bastante respecto a las otras heurísticas, la tendencia entre las diferentes implementaciones de todas formas fue muy marcada.
 	\item Grafos $d$-regulares: Esta familia no tuvo buen rendimiento con las diferentes versiones de GRASP. También los resultados obtenidos fueron peores que con las otras heurísticas implementadas anteriormente.
-	\item Arboles binarios: Al igual que con tas las otras heurísticas, el tiempo que tomo resolver cada uno de los grafos no fue constante. Respecto al tamaño de las soluciones, los resultados obtenidos tendían a alejarse de los valores ideales.
-	\item Cliques: La resolución de la cliques tomo una sorprendente cantidad de tiempo a medida que avanzaba el tiempo, esto se dio en una gran cantidad de las implementaciones, principalmente en GRASP3, GRASP4, GRASP7 y GRASP8.
+	\item Arboles binarios: Al igual que con las otras heurísticas, el tiempo que tomo resolver cada uno de los grafos no fue constante. Respecto al tamaño de las soluciones, los resultados obtenidos tendían a alejarse de los valores ideales.
+	\item Cliques: La resolución de de las cliques tomo una cantidad de tiempo importante a medida que aumentaba la cantidad de nodos en el grafo, esto se dio en todas las configuraciones, principalmente en GRASP3, GRASP4, GRASP7 y GRASP8.
 \end{itemize}
 
-Las heurísticas GRASP demostraron que había un gran margen de mejora para los grafos aleatorios, los resultados obtenidos fueron en su mayoría mejores que los conseguidos aplicando las heurísticas anteriores, un punto importante a destacar es que el tiempo que tomo la resolución no fue mucho mayor al de las otras heurísticas. Lamentablemente, la eficiencia de las diferentes configuraciones de GRASP no se mostraron en las otras familias, incluso llegando a casos donde los resultados fueron peores.
+Las heurísticas GRASP demostraron que había un gran margen de mejora para los grafos aleatorios. Los resultados obtenidos fueron en su mayoría mejores que los conseguidos aplicando las heurísticas anteriores. Un punto importante a destacar es que el tiempo que tomo la resolución no fue mucho mayor al de las otras heurísticas. Lamentablemente, la eficiencia de las diferentes configuraciones de GRASP no fueron tan significativas para otras familias. Esto se debe a que las heurísticas golosas llegaban al resultado optimo rápidamente, y al seguir intentando buscar mejores soluciones terminamos agregando un overhead.
 
 A pesar de todo esto, consideramos que la mejor configuración fue GRASP3, ya que si bien esta no tuvo un buen rendimiento con las familias que no sean la aleatoria, ninguna configuración fue particularmente buena para el resto de las familias. Valoramos el caso aleatorio principalmente, ya que consideramos que es el que mas chances tenemos de encontrar en un caso real.
 
 \subsection{Calibración de parámetros}
 
-Una vez elegida la configuración, se procedió con la calibración de parámetros. Primero vamos a ver los resultados obtenidos de variar el valor de $j$, manteniendo el de $k$ en 5. Para probar cada uno de los parámetros se probo con Grafos Aleatorios (con $m = 2n$), para analizar si era posible mejorar el tiempo de convergencia. Los resultados fueron:
+Una vez elegida la configuración, se procedió con la calibración de parámetros. Aquí hay claramente un \texttt{trade-off} entre tiempo de ejecución y calidad de la solución. Primero vamos a ver los resultados obtenidos de variar el valor de $j$, manteniendo el de $k$ en 5. Para probar cada uno de los parámetros se probo con Grafos Aleatorios (con $m = 2n$), para analizar si era posible mejorar el tiempo de convergencia. Los resultados fueron:
 
 \begin{figure}[H]
 \centering
