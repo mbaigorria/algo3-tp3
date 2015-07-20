@@ -5,7 +5,7 @@ Las familias finalmente escogidas para hacer un nuevo analisis fueron:
 \begin{itemize}
 	\item Heuristica Contructiva Golosa por Scoring
 	\item Busqueda local con segundo criterio de vecinidad, utilizando la Heuristica Golosa por Grado para generar la solucion inicial
-	\item GRASP3
+	\item GRASP3, con $j = 3$ y $k = 5$
 \end{itemize}
 
 Estas fueron las configuracion elegidas producto de la experimentacion realizada anteriormente.
@@ -48,17 +48,17 @@ Para analizar la eficacia de las configuraciones, nos reservamos una familia de 
 \centering
 
 \begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_grasp_3_5_circulos.csvTime}.pdf}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k3_5_circulos.csvTime}.pdf}
 	\begin{center}
 	GRASP3
 	\end{center}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_grasp_3_5_circulos.csvSolution}.pdf}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k3_5_circulos.csvSolution}.pdf}
 	\begin{center}
 	Resultados de GRASP3
 	\end{center}
 \end{subfigure}
 \end{figure}
 
-Como era de esperar, la heuristica GRASP no se comporto de la misma forma que lo hizo con la familia aleatoria,
+De las tres configuraciones, podemos ver claramente la Heuristica Golosa por Scoring es la que mejor rendimiento tuvo, no solo temporal sino que ademas el tamaño de las soluciones. Lamentablmente la Busqueda Local y la configuracion de GRASP no tuvieron el mismo rendimiento, sin embargo, creemos que esto no es representativo de la eficiencia de la heuristica GRASP. Tambien consideramos importante destacar que GRASP permite un nivel de personalizion bastante grande, con lo cual no descartamos que exista otra configuracion de GRASP que nos permita mejorar tanto el tiempo de convergencia, como el tamaño de las soluciones.

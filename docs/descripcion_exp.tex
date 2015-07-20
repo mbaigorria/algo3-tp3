@@ -15,7 +15,7 @@ Para la experimentación se decidió variar el $n$ principalmente, sin embargo, 
 
 \subsection{Grafos $d$-regulares conexos}
 
-Esta familia fue elegida ya que podemos dar la cantidad de nodos que conforman el CIDM, esta es $\lceil\frac{n}{d}\rceil$ \textbf{FALTA JUSTIFICAR}. Podemos ver esto en el siguiente ejemplo:
+Esta familia fue elegida ya que podemos dar la cantidad de nodos que conforman el CIDM, esta es $\lceil\frac{n}{d}\rceil$. Podemos ver esto en el siguiente ejemplo:
 
 \begin{figure}[ht]
 \centering
@@ -29,7 +29,9 @@ Esta familia fue elegida ya que podemos dar la cantidad de nodos que conforman e
 \end{subfigure}
 \end{figure}
 
-Esto nos permite hacer un análisis sobre el tamaño de las soluciones, permitiéndonos tener una mejor perspectiva a la hora de elegir la mejor configuración. Al igual que con los aleatorios, estos grafos poseen dos variable, las cuales son:
+Esto vale, ya que al ser un grafo $d$-regular al tomar un nodo ya logro alcanzar $d$ nodos, con lo cual alcanza con tomar $\frac{n}{d}$ nodos de forma correcta, podria llegar a conseguir el CIDM.
+
+Tener la cantidad de nodos nos permite hacer un análisis sobre el tamaño de las soluciones, permitiéndonos tener una mejor perspectiva a la hora de elegir la mejor configuración. Al igual que con los aleatorios, estos grafos poseen dos variable, las cuales son:
 
 \begin{itemize}
 	\item La cantidad de nodos
@@ -58,7 +60,7 @@ A diferencia de las dos familias anteriores, donde el tamaño de la solución es
 		\item Si la cantidad de niveles es impar ($log_2(n)\mod 2 \neq 0$), la cota inferior es $\mathlarger{\mathlarger{‎\sum}}_{i=0}^{\lfloor\frac{log_2(n)}{2}\rfloor - 1} 2^{2i + 1}$
 \end{itemize}
 
-Podemos ver esto en el siguiente ejemplo:
+Estas cotas son validos debido a la forma que generamos el grafo, este se va armando de a niveles, y no se crea un nuevo nivel hasta que el anterior se encuentre completo. En el caso que se tenga un Arbol donde existen niveles incompletos, la cota no vale.
 
 Para todo árbol sabemos que la cantidad de conexiones es igual a la cantidad de nodos menos uno, es por esto que para la experimentación se vario únicamente la cantidad de nodos.
 
@@ -76,4 +78,4 @@ Esta familia se reservo para ser utilizada como \texttt{test set} al momento de 
 
 \subsection{Metodología}
 
-Para hacer el análisis, se hizo variar el valor de $n$ entre 10 y 220. Si el generador para alguna de las familias recibe un segundo parámetro, los utilizados son los mencionados en la sección de cada familia. Para cada valor de $n$ se corrió el algoritmo 100 veces y se tomo el promedio del tiempo.
+Para hacer el análisis, se hizo variar el valor de $n$ entre 10 y 120. Si el generador para alguna de las familias recibe un segundo parámetro, los utilizados son los mencionados en la sección de cada familia. Para cada valor de $n$ se corrió el algoritmo 100 veces y se tomo el promedio del tiempo.

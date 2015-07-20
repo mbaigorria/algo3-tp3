@@ -13,16 +13,7 @@ Debido a la longitud de los nombres, se utilizo siguiente lista para referirnos 
 	\item GRASP8: Greedy por valor, Busqueda Local con segundo criterio de vecinidad, Terminacion prefijada
 \end{itemize}
 
-grasp1 = Midsbyiteration, HeapConstructiveRandomized, LocalSearch
-grasp2 = Midsbyiteration, HeapConstructiveRandomized2, LocalSearch
-grasp3 = Midsbyiteration, HeapConstructiveRandomized, LocalSearch2
-grasp4 = Midsbyiteration, HeapConstructiveRandomized2, LocalSearch2
-grasp5 = Midsbyvalue, HeapConstructiveRandomized, LocalSearch
-grasp6 = Midsbyvalue, HeapConstructiveRandomized2, LocalSearch
-grasp7 = Midsbyvalue, HeapConstructiveRandomized, LocalSearch2
-grasp8 = Midsbyvalue, HeapConstructiveRandomized2, LocalSearch2
-
-Para la experimentacion se siguio con la metodologia indicada anteriormente. Los resultados fueron los siguientes.
+Para la experimentacion se siguio con la metodologia indicada anteriormente. Una vez determinada la mejor configuracion de GRASP, se procedio a la calibracion de parametros de la misma.
 
 \newpage
 \subsubsection{GRASP1}
@@ -842,3 +833,165 @@ Primero vamos a ver los resultados por cada familia.
 Las heuristicas GRASP demostraron que habia un gran margen de mejora para los grafos aleatorios, los resultados obtenidos fueron en su mayoria mejores que los conseguidos aplicando las Heuristicas anteriores, un punto importante a destacar es que el tiempo que tomo la resolucion no fue mucho mayor al de las otras Heuristicas. Lamentablemente, la eficiencia de las diferentes configuraciones de GRASP no se mostraron en las otras familias, inlcuso llegando a casos donde los resultados fueron peores.
 
 A pesar de todo esto, consideramos que la mejor configuracion fue GRASP3, ya que si bien esta no tuvo un buen rendimiento con las familias que no sean la aleatoria, ninguna configuracion fue particularmente buena para el resto de las familias. Valoramos el caso aleatorio principalmente, ya que consideramos que es el que mas chances tenemos de encontrar en un caso real.
+
+\subsection{Calibracion de parametros}
+
+Una vez elegida la configuracion, se procedio con la calibracion de parametros. Primero vamos a ver los resultados obtenidos de variar el valor de $j$, mantiendo el de $k$ en 5. Para probar cada uno de los paramteros se probo con Grafos Aleatorios (con $m = 2n$), para analizar si era posible mejorar el tiempo de convergencia. Los resultados fueron:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k1_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 1$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k2_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 2$
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k3_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 3$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k4_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 4$
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k5_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 5$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k6_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 6$
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k7_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 7$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k8_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 8$
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k9_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 9$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_k10_1_2n.csvTime}.pdf}
+	\begin{center}
+	$j = 10$
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+Podemos ver claramente qe si $j = 3$, obtenemos los mejores resultados. Tambien se analizo los posibles valores de $k$, manteniendo $j = 5$. Se obtuvieron los siguientes resultados:
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_1_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 1$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_2_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 2$
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_3_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 3$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_4_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 4$
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_5_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 5$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_6_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 6$
+	\end{center}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_7_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 7$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_8_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 8$
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_9_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 9$
+	\end{center}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+	\includegraphics[scale=0.6]{graph/{output_grasp_3_10_1_2n.csvTime}.pdf}
+	\begin{center}
+	$k = 10$
+	\end{center}
+\end{subfigure}
+\end{figure}
+
+A diferencia del caso de $j$, aqui no hubo un impacto tan grande, si bien hubo diferencias, al variar el valor de $j$, no solo cambio el tiempo de convergencia, sino que ademas se estabilizo el tiempo promedio. Consideramos que si tomamos $j = 3$ y $k = 5$ pudimos conseguir una buena configuracion, un analisis mas exhaustivo habria sido analizar las 100 posibles combinaciones tomando valores entre 1 y 10 para $j$ y $k$. Sin embargo, los resultados obtenidos fueron buenos.
