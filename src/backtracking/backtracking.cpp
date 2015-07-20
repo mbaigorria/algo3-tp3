@@ -54,7 +54,7 @@ void backtracking(int current, int& n, int coveredNodes, int usedNodes, Node gra
 
 	if (current == n) return; // no nodes left to add.
 	if (graph[current].reachable == true) return backtracking(current + 1, n, coveredNodes, usedNodes, graph, localSolution, nodesUsedInSolution);
-	if (usedNodes + 1 == nodesUsedInSolution) return; // cant beat current solution
+	// if (usedNodes + 1 == nodesUsedInSolution) return; // cant beat current solution
 
 	int pushed = 0;
 	forward_list<int> added; // save changes to graph to then restore
