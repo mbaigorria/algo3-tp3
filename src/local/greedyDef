@@ -1,0 +1,4 @@
+greedy1: greedyConstructive, localSearch
+greedy2: greedyConstructive, localSearch2
+greedy3: greedyHeapConstructive, localSearch
+greedy4: greedyHeapConstructive, localSearch2

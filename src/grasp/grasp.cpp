@@ -31,7 +31,7 @@ int main() {
 		graph[v].degree++;
 	}
 
-	int nodesUsedInSolution = graspMIDSByIterations(graph, n, 7, 7, localSolution);
+	int nodesUsedInSolution = graspMIDSByIterations(graph, n, 10, 5, localSolution);
 	// int nodesUsedInSolution = graspMIDSByValue(graph, n, 3, 3, localSolution);
 
 	// display solution
@@ -64,9 +64,10 @@ int graspMIDSByIterations(Node graph[], int n, int j, int k, bool localSolution[
 	int currentBest = n + 1;
 	while (j > 0) {
 		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
-		//int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
+		// int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
 
 		// nodesUsed = localSearch(graph, n, nodesUsed);
+		nodesUsed = localSearch2(graph, n, nodesUsed);
 
 		if (nodesUsed < currentBest) { // save local solution
 			for (int i = 0; i < n; ++i) {
@@ -91,11 +92,11 @@ int graspMIDSByValue(Node graph[], int n, int j, int k, bool localSolution[]) {
 	int currentBest = n + 1;
 	int cycles = 0;
 	while (cycles < j) {
-		int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
-		//int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
+		// int nodesUsed = greedyHeapConstructiveRandomized(graph, n, k);
+		int nodesUsed = greedyHeapConstructiveRandomized2(graph, n, k);
 		
-		nodesUsed = localSearch(graph, n, nodesUsed);
-		// nodesUsed = localSearch2(graph, n, nodesUsed);
+		// nodesUsed = localSearch(graph, n, nodesUsed);
+		nodesUsed = localSearch2(graph, n, nodesUsed);
 
 		if (nodesUsed < currentBest) { // save local solution
 			for (int i = 0; i < n; ++i) {
