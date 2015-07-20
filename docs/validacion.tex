@@ -1,64 +1,52 @@
-\section{Comparacion de eficiencia}
+\section{Comparación de eficiencia}
 
-Las familias finalmente escogidas para hacer un nuevo analisis fueron:
+Las familias finalmente escogidas para hacer un nuevo análisis fueron:
 
 \begin{itemize}
-	\item Heuristica Contructiva Golosa por Scoring
-	\item Busqueda local con segundo criterio de vecinidad, utilizando la Heuristica Golosa por Grado para generar la solucion inicial
-	\item GRASP3, con $j = 3$ y $k = 5$
+	\item Heuristica Contructiva Golosa por Scoring.
+	\item Busqueda local con segundo criterio de vecinidad, utilizando la Heuristica Golosa por Grado para generar la solucion inicial.
+	\item GRASP3, con $j = 3$ y $k = 5$.
 \end{itemize}
 
-Estas fueron las configuracion elegidas producto de la experimentacion realizada anteriormente.
+Estas fueron las configuración elegidas producto de la experimentación realizada anteriormente.
 
 \subsection{Resultados}
 
-Para analizar la eficacia de las configuraciones, nos reservamos una familia de grafos para experimentar, esta es la de union de componentes conexas. La metodologia aplcada fue la misma que en los otros casos, los resultados obtenidos fueron los siguientes:
+Para analizar la eficacia de las configuraciones, nos reservamos una familia de grafos para experimentar, esta es la de unión de componentes conexas. Lo hicimos de esta manera para evitar el \texttt{over-fitting}, dado que no podemos evaluar la efectividad de GRASP bajo el mismo \texttt{training set}. La metodología aplicada fue la misma que en los otros casos, los resultados obtenidos fueron los siguientes:
 
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_greedy_1_5_circulos.csvTime}.pdf}
-	\begin{center}
-	Heuristica Golosa
-	\end{center}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_greedy_1_5_circulos.csvTime}.pdf}
+	\caption*{Heurística Golosa}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_greedy_1_5_circulos.csvSolution}.pdf}
-	\begin{center}
-	Resultado de la Heuristica Golosa
-	\end{center}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_greedy_1_5_circulos.csvSolution}.pdf}
+	\caption*{Resultado de la Heurística Golosa}
 \end{subfigure}
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_5_circulos.csvTime}.pdf}
-	\begin{center}
-	Busqueda Local
-	\end{center}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_5_circulos.csvTime}.pdf}
+	\caption*{Búsqueda Local}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_local_4_5_circulos.csvSolution}.pdf}
-	\begin{center}
-	Resultado de la Busqueda Local
-	\end{center}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_local_4_5_circulos.csvSolution}.pdf}
+	\caption*{Resultado de la Búsqueda Local}
 \end{subfigure}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_grasp_3_k3_5_circulos.csvTime}.pdf}
-	\begin{center}
-	GRASP3
-	\end{center}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_grasp_3_k3_5_circulos.csvTime}.pdf}
+	\caption*{GRASP3}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
-	\includegraphics[scale=0.6]{graph/{output_grasp_3_k3_5_circulos.csvSolution}.pdf}
-	\begin{center}
-	Resultados de GRASP3
-	\end{center}
+\begin{subfigure}[h]{0.4\textwidth}
+	\includegraphics[scale=0.5]{graph/{output_grasp_3_k3_5_circulos.csvSolution}.pdf}
+	\caption*{Resultados de GRASP3}
 \end{subfigure}
 \end{figure}
 
-De las tres configuraciones, podemos ver claramente la Heuristica Golosa por Scoring es la que mejor rendimiento tuvo, no solo temporal sino que ademas el tamaño de las soluciones. Lamentablmente la Busqueda Local y la configuracion de GRASP no tuvieron el mismo rendimiento, sin embargo, creemos que esto no es representativo de la eficiencia de la heuristica GRASP. Tambien consideramos importante destacar que GRASP permite un nivel de personalizion bastante grande, con lo cual no descartamos que exista otra configuracion de GRASP que nos permita mejorar tanto el tiempo de convergencia, como el tamaño de las soluciones.
+De las tres configuraciones, podemos ver claramente que la Heurística Golosa por Scoring es la que mejor rendimiento tuvo, no solo temporal sino que ademas el tamaño de las soluciones. Lamentablemente la Búsqueda Local y la configuración de GRASP no tuvieron el mismo rendimiento, Sin embargo, creemos que esto no es representativo de la eficiencia de la Heurística GRASP. También consideramos importante destacar que GRASP permite un nivel de personalización bastante grande, con lo cual no descartamos que exista otra configuración de GRASP que nos permita mejorar tanto el tiempo de convergencia, como el tamaño de las soluciones.
